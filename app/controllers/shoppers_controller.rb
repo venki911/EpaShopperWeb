@@ -39,4 +39,18 @@ class ShoppersController < ApplicationController
 
   end
 
+
+  private
+    def set_user
+
+    end
+
+    def require_admin
+      if !is_admin?
+        flash[:danger] = 'That action requires admin access'
+        redirect_to root_path
+      end
+    end
+
+
 end
