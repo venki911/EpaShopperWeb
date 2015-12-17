@@ -1,0 +1,37 @@
+<div class="container">
+
+  <h1 class="section-header">Shopper List</h1>
+
+  <%= link_to 'Create New', new_shopper_path, class: 'btn btn-warning' %>
+
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Joined On</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @shoppers.each do |shopper| %>
+        <tr>
+          <td><%= shopper.id %></td>
+          <td><%= shopper.username %></td>
+          <td><%= shopper.created_at %></td>
+          <td>
+            <% if !shopper.admin? || (current_user.admin? && current_user.id == shopper.id) %>
+            <%= link_to 'Edit', edit_shopper_path(shopper), method: :get, class: 'btn btn-sm btn-warning' %>
+
+              <%= link_to 'Delete', shopper_path(shopper), method: :delete, data:{confirm: "Really delete shopper #{shopper.username}"}, class: 'btn btn-sm btn-danger' %>
+            <% end %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

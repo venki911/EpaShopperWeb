@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'reports/:id', to: 'shopper_reports#show'
   delete 'reports/:id', to: 'shopper_reports#destroy'
 
+  get 'login', to: 'sessions#login'
+  post 'login', to: 'sessions#new'
+  delete 'login', to: 'sessions#logout'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
