@@ -16,8 +16,24 @@ class ShopperReportsController < ApplicationController
     redirect_to reports_path
   end
 
-  private
+  def create
+    if params[:shopper_report]
 
+      begin
+        report = ShopperReport(json: params[:shopper_report])
+        report.save
+        render :json => {success: true} , status: :ok
+      rescue => e
+        render :json => e , status: :unprocessable_entity
+      end
+
+    else
+      render :json => {success: false} , status: :unprocessable_entity
+    end
+
+  end
+
+  private
     def set_report
 
       @shopper_report = ShopperReport.find(params[:id])
