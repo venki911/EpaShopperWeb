@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20151217195109) do
     t.string   "description"
     t.string   "image_source"
     t.float    "price"
-    t.boolean  "complete"
     t.integer  "quantity_missing"
     t.integer  "quantity_substituted"
     t.integer  "quantity_requested"
@@ -32,9 +31,9 @@ ActiveRecord::Schema.define(version: 20151217195109) do
 
   create_table "shop_collections", force: :cascade do |t|
     t.string   "name"
-    t.string   "orders_count"
-    t.string   "aisle_count"
-    t.integer  "time_in_seconds"
+    t.integer  "orders_count"
+    t.integer  "items_count"
+    t.integer  "time_taken"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shopper_report_id"
@@ -43,8 +42,9 @@ ActiveRecord::Schema.define(version: 20151217195109) do
   create_table "shopper_reports", force: :cascade do |t|
     t.string   "shopper_name"
     t.integer  "orders_count"
-    t.integer  "line_items_count"
-    t.integer  "total_time_in_seconds"
+    t.integer  "items_count"
+    t.integer  "test_amount"
+    t.integer  "total_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

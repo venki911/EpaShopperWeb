@@ -6,11 +6,10 @@
 
     <thead>
     <tr>
-      <th>Id</th>
-      <th>Shopper</th>
-      <th>Time</th>
-      <th>Line Items</th>
       <th>Date</th>
+      <th>Shopper</th>
+      <th>Total Time</th>
+      <th>Line Items</th>
       <th></th>
     </tr>
     </thead>
@@ -18,11 +17,10 @@
     <tbody>
     <% @shopper_reports.each do |report| %>
         <tr>
-          <td><%= report.id  %></td>
+          <td><%= report.created_at  %></td>
           <td><%= report.shopper_name %></td>
           <td><%= report.total_time_in_seconds %></td>
           <td><%= report.line_items_count %></td>
-          <td><%= report.created_at %></td>
           <td>
             <% if is_admin? %>
                 <%= link_to 'Delete', reports_path, method: :delete, data:{confirm: 'Really delete report?'}, class: 'btn btn-sm btn-danger' %>

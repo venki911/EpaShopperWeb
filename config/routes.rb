@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   resources :shoppers
   get 'reports', to: 'shopper_reports#index'
-  get 'reports/:id', to: 'shopper_reports#show'
+  post 'reports', to: 'shopper_reports#create'
+  get 'reports/:id', to: 'shopper_reports#show', as: 'report'
+
   delete 'reports/:id', to: 'shopper_reports#destroy'
+
 
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#new'

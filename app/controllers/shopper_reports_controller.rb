@@ -20,7 +20,7 @@ class ShopperReportsController < ApplicationController
     if params[:shopper_report]
 
       begin
-        report = ShopperReport(json: params[:shopper_report])
+        report = ShopperReport.new.convert_from_json(params[:shopper_report])
         report.save
         render :json => {success: true} , status: :ok
       rescue => e
