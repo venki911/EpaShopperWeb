@@ -1,0 +1,112 @@
+<div class="container">
+
+  <h1 class="section-header">Details For Report <%= @shopper_report.id %></h1>
+
+  <!-- Summary of Shop Information -->
+  <!-- =========================================================================== -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Time</th>
+      <th>Orders Count</th>
+      <th>Items Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @shopper_report.shop_collections.each do |shop| %>
+        <tr>
+          <td><%= shop.name %></td>
+          <td style="font-weight: bold"><%= shop.time_taken %></td>
+          <td><%= shop.orders_count %></td>
+          <td><%= shop.items_count %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table> <!-- end shop information -->
+
+  <!-- Line Item Details For Each Shop -->
+  <!-- =========================================================================== -->
+  <div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
+          <li role="presentation" class="<%= 'active' if index == 0 %>"><a href="#<%= shop.name %>" aria-controls="home" role="tab" data-toggle="tab"><%= shop.name %></a></li>
+      <% end %>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
+
+          <div role="tabpanel" class="<%= index == 0 ? 'tab-pane active' : 'tab-pane' %>" id="<%= shop.name %>">
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th></th>
+                <th class="text-center">Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Qty Req.</th>
+                <th>Qty Fnd.</th>
+                <th>Qty Sub.</th>
+                <th>Qty Miss</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% shop.line_items.each do |item| %>
+                  <tr class="text-center">
+                    <td class="text-center"> <img src="<%= item.image_source %>" class="line-item-image"/></td>
+                    <td><%= item.title %></td>
+                    <td><%= item.description %></td>
+                    <td>$<%= item.price %></td>
+                    <td style="font-size: 30px; vertical-align: middle"><%= item.quantity_requested %></td>
+                    <td style="background-color: #90ea8a; font-size: 30px; vertical-align: middle"><%= item.quantity_found %></td>
+                    <td style="background-color: #fffaa5; font-size: 30px; vertical-align: middle"><%= item.quantity_substituted %></td>
+                    <td style="background-color: #ff9696; font-size: 30px; vertical-align: middle"><%= item.quantity_missing %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+
+            </table>
+
+
+
+
+          </div>
+      <% end %>
+
+    </div>
+
+  </div> <!-- end line item details -->
+
+
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+  <div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+      <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">A</div>
+      <div role="tabpanel" class="tab-pane" id="profile">B</div>
+      <div role="tabpanel" class="tab-pane" id="messages">C</div>
+      <div role="tabpanel" class="tab-pane" id="settings">D</div>
+    </div>
+
+  </div>
+
+
+</div>

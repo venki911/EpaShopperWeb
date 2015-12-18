@@ -17,6 +17,9 @@ class ShopperReportsController < ApplicationController
   end
 
   def create
+
+    p params[:shopper_report]
+
     if params[:shopper_report]
 
       begin

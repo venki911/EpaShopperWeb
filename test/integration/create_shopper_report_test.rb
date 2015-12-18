@@ -3,7 +3,7 @@ require 'test_helper'
 class CreateShopperReportTest < ActionDispatch::IntegrationTest
 
   def setup
-    @json = {shopper_name: 'bob', orders_count: 22, shop_collections: [{aisle_count: 1, name: 'Costco', line_items: [{product_id: 123121, title: 'My Product'}]}]}
+    @json = {shopper_name: 'bob', orders_count: 22, shop_collections: [{aisle_count: 1, name: 'Costco', line_items: [{product_id: 4294967296, title: 'My Product'}]}]}
   end
 
   test 'create new shopper report' do

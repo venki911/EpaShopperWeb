@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 class="section-header">Shopper List</h1>
+  <h1 class="section-header">Shopper Reports</h1>
 
   <table class="table table-striped">
 
@@ -9,6 +9,7 @@
       <th>Date</th>
       <th>Shopper</th>
       <th>Total Time</th>
+      <th>Orders</th>
       <th>Line Items</th>
       <th></th>
     </tr>
@@ -17,10 +18,11 @@
     <tbody>
     <% @shopper_reports.each do |report| %>
         <tr>
-          <td><%= report.created_at  %></td>
+          <td><%= link_to "#{report.created_at.strftime('%d/%m/%y %H:%M')}", report_path(report) %></td>
           <td><%= report.shopper_name %></td>
-          <td><%= report.total_time_in_seconds %></td>
-          <td><%= report.line_items_count %></td>
+          <td><%= report.total_time %></td>
+          <td><%= report.orders_count %></td>
+          <td><%= report.items_count %></td>
           <td>
             <% if is_admin? %>
                 <%= link_to 'Delete', reports_path, method: :delete, data:{confirm: 'Really delete report?'}, class: 'btn btn-sm btn-danger' %>

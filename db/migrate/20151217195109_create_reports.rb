@@ -21,8 +21,8 @@ class CreateReports < ActiveRecord::Migration
       end
 
       create_table :line_items do |t|
-        t.integer :variant_id
-        t.integer :product_id
+        t.integer :variant_id, :limit => 8
+        t.integer :product_id, :limit => 8
         t.string :title
         t.string :description
         t.string :image_source

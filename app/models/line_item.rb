@@ -10,13 +10,12 @@ class LineItem < ActiveRecord::Base
     self.description = json[:description]
     self.image_source = json[:image_source]
     self.price = json[:price]
-    self.quantity_requested = json[:quantity_requested]
-    self.quantity_substituted = json[:quantity_substituted]
-    self.quantity_missing = json[:quantity_missing]
+    self.quantity_requested = json[:quantity_requested] || 0
+    self.quantity_substituted = json[:quantity_substituted] || 0
+    self.quantity_missing = json[:quantity_missing] || 0
     self.aisle = json[:aisle]
     self
   end
-
 
   def attributes=(hash)
     hash.each do |key, value|
@@ -28,6 +27,9 @@ class LineItem < ActiveRecord::Base
     instance_values
   end
 
+  def quantity_found
+    quantity_requested - quantity_substituted - quantity_missing
+  end
 
 
 end
