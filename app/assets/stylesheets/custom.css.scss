@@ -64,8 +64,11 @@ input[type=text]{
 
 .btn{
   border-radius: 0px;
+}
+.btn-min-width{
   min-width: 150px;
 }
+
 a:link, a:visited {
   color: orange;
 }
@@ -93,10 +96,7 @@ a.btn{
   font-weight: bold;
 }
 
-td, th{
-  text-align: center;
-  vertical-align: middle !important;
-}
+
 
 .big-cell{
   font-size: 30px;
@@ -118,6 +118,11 @@ td, th{
 #report-line-items{
   margin-top: 80px;
   margin-bottom: 30px;
+
+  td, th{
+    text-align: center;
+    vertical-align: middle !important;
+  }
 }
 
 #report-header{

@@ -3,19 +3,39 @@ class ShopperReportsController < ApplicationController
   before_action :set_report, only: [:show, :destroy]
   before_action :require_admin, only: [:destroy]
 
+
+  # GET INDEX
+  #=================================================================================================================
   def index
-    @shopper_reports = ShopperReport.all
+
+    if params[:date_filter]
+      begin
+        target_date = params[:date_filter].to_date.in_time_zone('EST')
+        @shopper_reports = ShopperReport.where(:created_at => target_date.beginning_of_day..target_date.end_of_day)
+      rescue
+        @shopper_reports = ShopperReport.all.reverse_order
+      end
+    else
+      @shopper_reports = ShopperReport.all.reverse_order
+    end
+
   end
 
+  # GET SHOW
+  #=================================================================================================================
   def show
   end
 
+  # DESTROY
+  #=================================================================================================================
   def destroy
     @shopper_report.destroy
     flash[:success] = 'Report successfully deleted'
     redirect_to reports_path
   end
 
+  # POST CREATE
+  #=================================================================================================================
   def create
 
     #p params[:shopper_report]
@@ -40,6 +60,10 @@ class ShopperReportsController < ApplicationController
     end
 
   end
+
+
+  # HELPERS
+  #=================================================================================================================
 
   private
     def set_report

@@ -21,7 +21,7 @@
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm Password', autocomplete: 'off' %>
       </div>
 
-      <%= f.submit(@shopper.new_record? ? 'Create' : 'Edit', class: 'btn btn-warning')%>
+      <%= f.submit(@shopper.new_record? ? 'Create' : 'Edit', class: 'btn btn-warning btn-min-width')%>
 
   <% end %>
 
