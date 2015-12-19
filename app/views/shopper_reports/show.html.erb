@@ -1,7 +1,7 @@
 <div class="container">
 
   <section id="report-header">
-    <div>19-Sept<br/>2015</div>
+    <div><%= format_report_date(@shopper_report.created_at, separator: "\n") %></div>
     <h1>Shopper Report</h1>
     <p>Uploaded by <strong><%= @shopper_report.shopper_name.capitalize %></strong> on <%= format_report_date(@shopper_report.created_at) %></p>
   </section>
