@@ -1,14 +1,14 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar-header" style="height: 90px;">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar_collapse_section">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Epa Shopper Web', root_path, class: 'navbar-brand', id: 'logo' %>
+      <%= link_to image_tag('epa_brand.png', style: 'height: auth; width: 150px'), root_path, class: 'navbar-brand', id: 'logo' %>
     </div>
 
     <!-- COLLAPSIBLE PORTION OF NAV-BAR -->
@@ -19,8 +19,8 @@
       <!------------------------------------------------------------------------------>
       <ul class="nav navbar-nav">
 
-        <li><%= link_to 'Reports', reports_path %></li>
-        <li><%= link_to 'Edit Requests', root_path %></li>
+        <li style="font-size: 1.3em"><%= link_to 'Reports', reports_path %></li>
+        <li style="font-size: 1.3em"><%= link_to 'Product Changes', root_path %></li>
 
         <% if is_admin? %>
           <li><%= link_to 'Shoppers', shoppers_path%></li>
@@ -34,7 +34,7 @@
         <% if logged_in? %>
             <li><%= link_to 'Logout', login_path, method: :delete %>
         <% else %>
-            <li><%= link_to 'Admin', login_path, method: :get %></li>
+            <li style="font-size: 1.3em"><%= link_to 'Admin', login_path, method: :get %></li>
         <% end %>
 
       </ul>

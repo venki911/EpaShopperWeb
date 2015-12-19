@@ -4,18 +4,29 @@ module ApplicationHelper
     seconds = ticks % 60
     minutes = ((ticks - seconds)/60)%60
     hours = (ticks - seconds - minutes * 60)/3600
-    "#{hours}:#{minutes}:#{seconds}"
+
+    "#{append_leading_zero hours}:#{append_leading_zero minutes}:#{append_leading_zero seconds}"
   end
 
   def logo_for_store(name)
     case name.downcase
-      when 'Costco'
-        'assets/images/costco_logo.png'
-      when 'Loblaws'
-        'assets/images/costco_logo.png'
+      when 'costco'
+        'costco_logo.png'
+      when 'loblaws'
+        'loblaws_logo.png'
       else
-        'assets/images/epa_logo.png'
+        'epa_logo.png'
     end
   end
+
+
+  def format_report_date(date)
+    date.in_time_zone('EST').strftime('%d-%B-%y %I:%M %p')
+  end
+
+  private
+    def append_leading_zero(num)
+      num < 10 ? "0#{num}" : num
+    end
 
 end
