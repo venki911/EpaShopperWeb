@@ -1,10 +1,49 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$navbar-app-height: 80px;
+$color-app-primary: #00BE43;
+$color-app-active: orange;
 
-.section-header{
-  margin-bottom: 30px;
+$color-app-fulfilled: #90ea8a;
+$color-app-missing: #ff9696;
+$color-app-substituted: #fffaa5;
+
+$color-app-text-secondary: #777777;
+
+/* NAVBAR */
+/* ------------------------------------------------------ */
+
+.navbar-default{
+  height: $navbar-app-height;
+
+  .navbar-brand{
+    padding: 10px 20px 0 0;
+  }
+
+  #navbar-brand-image{
+    height: auto;
+    width: 140px;
+  }
+
 }
+
+.navbar-nav{
+
+  li a{
+    line-height: $navbar-app-height;
+    font-size: 1.3em;
+    transition: all .1s ease-in-out;
+    padding: 0px 15px;
+  }
+  li a:hover{
+    transform: scale(1.1);
+  }
+}
+
+/* NAVBAR */
+/* ------------------------------------------------------ */
+
 
 .line-item-image{
   height: 80px;
@@ -16,6 +55,87 @@
   width: 150px;
 }
 
+/* GENERAL */
+/* ------------------------------------------------------ */
+
+input[type=text]{
+  border-radius: 1px;
+}
+
+.btn{
+  border-radius: 0px;
+  min-width: 150px;
+}
 a:link, a:visited {
   color: orange;
+}
+
+a.btn{
+  color: white;
+}
+
+.section-header{
+  margin: 30px 0;
+}
+.top-bot-margin{
+  margin: 20px 0;
+}
+
+
+/* SHOPPER REPORT DETAILS DISPLAY*/
+/* ------------------------------------------------------ */
+
+
+.nav-tabs{
+  font-size: 1.5em;
+}
+.bold{
+  font-weight: bold;
+}
+
+td, th{
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.big-cell{
+  font-size: 30px;
+}
+.color-fulfilled{
+  background-color: $color-app-fulfilled;
+}
+.color-substituted{
+  background-color: $color-app-substituted;
+}
+.color-missing{
+  background-color: $color-app-missing;
+}
+
+#report-shop-summary{
+  margin-top: 60px;
+}
+
+#report-line-items{
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+#report-header{
+
+  height: 80px;
+
+  div{
+    height: 100%;
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+    background-color: $color-app-primary;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+    font-size: 1.5em;
+  }
+  p{
+    color: $color-app-text-secondary
+  }
 }

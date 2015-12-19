@@ -1,47 +1,48 @@
 <div class="container">
 
-  <div style="height: 80px">
-    <div style="height: 100%; width: 100px; float: left; margin-right: 10px; background-color: #00BE43; text-align: center; padding-top: 10px; color: white; font-size: 1.5em">19-Sept<br/>2015</div>
+  <section id="report-header">
+    <div>19-Sept<br/>2015</div>
     <h1>Shopper Report</h1>
-    <p style="color: #777777">Uploaded by <strong><%= @shopper_report.shopper_name %></strong> on <%= format_report_date(@shopper_report.created_at) %></p>
-  </div>
-
-  <br/></br>
+    <p>Uploaded by <strong><%= @shopper_report.shopper_name.capitalize %></strong> on <%= format_report_date(@shopper_report.created_at) %></p>
+  </section>
 
   <!-- Summary of Shop Information -->
   <!-- =========================================================================== -->
-  <table class="table">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Time</th>
-      <th>Orders Count</th>
-      <th>Items Count</th>
-    </tr>
-    </thead>
 
-    <tbody>
-    <% @shopper_report.shop_collections.each do |shop| %>
-        <tr>
-          <td><%= image_tag logo_for_store(shop.name), style: 'height: auto; width: 100px;' %></td>
-          <td style="font-weight: bold"><%= timer_string shop.time_taken %></td>
-          <td><%= shop.orders_count %></td>
-          <td><%= shop.items_count %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table> <!-- end shop information -->
+  <section id="report-shop-summary">
+    <table class="table" >
+      <thead>
+      <tr>
+        <th></th>
+        <th>Time</th>
+        <th>Orders Count</th>
+        <th>Items Count</th>
+      </tr>
+      </thead>
 
-  <br/><br/>
+      <tbody>
+      <% @shopper_report.shop_collections.each do |shop| %>
+          <tr>
+            <td><%= image_tag logo_for_store(shop.name), style: 'height: auto; width: 100px;' %></td>
+            <td class="bold"><%= timer_string shop.time_taken %></td>
+            <td><%= shop.orders_count %></td>
+            <td><%= shop.items_count %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table> <!-- end shop information -->
+
+  </section>
+
 
   <!-- Line Item Details For Each Shop -->
   <!-- =========================================================================== -->
-  <div>
+  <section id="report-line-items">
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
-          <li role="presentation" class="<%= 'active' if index == 0 %>"><a style="font-size: 1.5em;" href="#<%= shop.name %>" aria-controls="home" role="tab" data-toggle="tab"><%= shop.name %></a></li>
+          <li role="presentation" class="<%= 'active' if index == 0 %>"><a href="#<%= shop.name %>" aria-controls="home" role="tab" data-toggle="tab"><%= shop.name %></a></li>
       <% end %>
     </ul>
 
@@ -68,15 +69,15 @@
 
               <tbody>
               <% shop.line_items.each do |item| %>
-                  <tr class="text-center">
-                    <td class="text-center"> <img src="<%= item.image_source %>" class="line-item-image"/></td>
-                    <td><%= item.title %></td>
+                  <tr >
+                    <td style="vertical-align: middle;"> <img src="<%= item.image_source %>" class="line-item-image"/></td>
+                    <td style="vertical-align: middle;"><%= item.title %></td>
                     <td><%= item.description %></td>
                     <td>$<%= item.price %></td>
-                    <td style="font-size: 30px; vertical-align: middle"><%= item.quantity_requested %></td>
-                    <td style="background-color: #90ea8a; font-size: 30px; vertical-align: middle"><%= item.quantity_found %></td>
-                    <td style="background-color: #fffaa5; font-size: 30px; vertical-align: middle"><%= item.quantity_substituted %></td>
-                    <td style="background-color: #ff9696; font-size: 30px; vertical-align: middle"><%= item.quantity_missing %></td>
+                    <td class="big-cell"><%= item.quantity_requested %></td>
+                    <td class="big-cell color-fulfilled"><%= item.quantity_found %></td>
+                    <td class="big-cell color-substituted"><%= item.quantity_substituted %></td>
+                    <td class="big-cell color-missing"><%= item.quantity_missing %></td>
                   </tr>
               <% end %>
               </tbody>
@@ -91,9 +92,10 @@
 
     </div>
 
-  </div> <!-- end line item details -->
+    <%= link_to 'Back', :back, class: 'btn btn-warning top-bot-margin' %>
 
-  <br/><br/>
-  <%= link_to 'Back', :back, class: 'btn btn-warning', style: 'min-width: 150px; border-radius:0;' %>
+  </section> <!-- end line item details -->
+
+
 
 </div>
