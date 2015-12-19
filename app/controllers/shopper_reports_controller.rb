@@ -18,13 +18,18 @@ class ShopperReportsController < ApplicationController
 
   def create
 
-    p params[:shopper_report]
+    #p params[:shopper_report]
 
     if params[:shopper_report]
 
       begin
         report = ShopperReport.new.convert_from_json(params[:shopper_report])
         report.save
+
+        Thread.new do
+          ReportEmailer.send_report_uploaded_email(@shopper_report).deliver
+        end
+
         render :json => {success: true} , status: :ok
       rescue => e
         render :json => e , status: :unprocessable_entity

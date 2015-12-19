@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>New Report Uploaded</h1>
+<p>Shopper <%= @shopper_report.shopper_name %> has just uploaded a new report. View it <%= link_to 'here.', report_url(@shopper_report) %></p>
+
+<p>Best regards,</p>
+<p>E-panneur Shopper App Mailer Bot</p>
+</body>
+</html>
