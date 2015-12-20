@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Database adapter
 gem 'mysql2', '~> 0.3.18'
+gem 'test-unit', '~> 3.0.8'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
