@@ -52,5 +52,5 @@ end
 group :development do
   gem 'capistrano', '~> 3.4'
   gem 'capistrano-rails', '~> 1.1.5'
-  gem 'capistrano-rbenv', github: 'capistrano/rbenv'
+  gem 'capistrano-rbenv', '~> 2.0', '>= 2.0.3'
 end
