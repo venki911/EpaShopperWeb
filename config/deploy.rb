@@ -6,7 +6,6 @@ set :repo_url, 'git@github.com:stefanwapnick/EpaShopperWeb.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, current_git_branch
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/epa_shopper_app'
