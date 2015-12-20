@@ -9,6 +9,7 @@ set :repo_url, 'git@github.com:stefanwapnick/EpaShopperWeb.git'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/epa_shopper_app'
+set :rbenv_path, '/home/deploy/.rbenv/'
 
 # Default value for :scm is :git
 # set :scm, :git
