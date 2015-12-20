@@ -49,3 +49,8 @@ group :development do
   gem 'spring'
 end
 
+group :development do
+  gem 'capistrano', '~> 3.4'
+  gem 'capistrano-rails', '~> 1.1.5'
+  gem 'capistrano-rbenv', github: 'capistrano/rbenv'
+end
