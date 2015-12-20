@@ -16,45 +16,45 @@ ActiveRecord::Schema.define(version: 20151217195109) do
   create_table "line_items", force: :cascade do |t|
     t.integer  "variant_id",           limit: 8
     t.integer  "product_id",           limit: 8
-    t.string   "title"
-    t.string   "description"
-    t.string   "image_source"
-    t.float    "price"
-    t.integer  "quantity_missing"
-    t.integer  "quantity_substituted"
-    t.integer  "quantity_requested"
-    t.string   "aisle"
+    t.string   "title",                limit: 255
+    t.string   "description",          limit: 255
+    t.string   "image_source",         limit: 255
+    t.float    "price",                limit: 24
+    t.integer  "quantity_missing",     limit: 4
+    t.integer  "quantity_substituted", limit: 4
+    t.integer  "quantity_requested",   limit: 4
+    t.string   "aisle",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shop_collection_id"
+    t.integer  "shop_collection_id",   limit: 4
   end
 
   create_table "shop_collections", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "orders_count"
-    t.integer  "items_count"
-    t.integer  "time_taken"
+    t.string   "name",              limit: 255
+    t.integer  "orders_count",      limit: 4
+    t.integer  "items_count",       limit: 4
+    t.integer  "time_taken",        limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shopper_report_id"
+    t.integer  "shopper_report_id", limit: 4
   end
 
   create_table "shopper_reports", force: :cascade do |t|
-    t.string   "shopper_name"
-    t.integer  "orders_count"
-    t.integer  "items_count"
-    t.integer  "test_amount"
-    t.integer  "total_time"
+    t.string   "shopper_name", limit: 255
+    t.integer  "orders_count", limit: 4
+    t.integer  "items_count",  limit: 4
+    t.integer  "test_amount",  limit: 4
+    t.integer  "total_time",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "shoppers", force: :cascade do |t|
-    t.string   "username"
-    t.string   "password_digest"
+    t.string   "username",        limit: 255
+    t.string   "password_digest", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                       default: false
   end
 
 end

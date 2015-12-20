@@ -11,12 +11,12 @@ class ShopperReportsController < ApplicationController
     if params[:date_filter]
       begin
         target_date = params[:date_filter].to_date.in_time_zone('EST')
-        @shopper_reports = ShopperReport.where(:created_at => target_date.beginning_of_day..target_date.end_of_day)
+        @shopper_reports = ShopperReport.where(:created_at => target_date.beginning_of_day..target_date.end_of_day).order(created_at: :desc)
       rescue
-        @shopper_reports = ShopperReport.all.reverse_order
+        @shopper_reports = ShopperReport.all.order(created_at: :desc)
       end
     else
-      @shopper_reports = ShopperReport.all.reverse_order
+      @shopper_reports = ShopperReport.all.order(created_at: :desc)
     end
 
   end
@@ -42,18 +42,19 @@ class ShopperReportsController < ApplicationController
 
     if params[:shopper_report]
 
-      begin
+      #begin
         report = ShopperReport.new.convert_from_json(params[:shopper_report])
         report.save
-
         Thread.new do
-          ReportEmailer.send_report_uploaded_email(@shopper_report).deliver
+          ReportEmailer.send_report_uploaded_email(report).deliver_now
         end
 
         render :json => {success: true} , status: :ok
-      rescue => e
-        render :json => e , status: :unprocessable_entity
-      end
+     # rescue => e
+        #p e.backtrace
+      #  render :json => e , status: :unprocessable_entity
+
+      #end
 
     else
       render :json => {success: false} , status: :unprocessable_entity
