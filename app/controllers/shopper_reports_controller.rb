@@ -42,7 +42,7 @@ class ShopperReportsController < ApplicationController
 
     if params[:shopper_report]
 
-      #begin
+      begin
         report = ShopperReport.new.convert_from_json(params[:shopper_report])
         report.save
         #Thread.new do
