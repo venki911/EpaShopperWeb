@@ -14,7 +14,8 @@
       <thead>
       <tr>
         <th></th>
-        <th>Time</th>
+        <th>Start Time</th>
+        <th>Time Taken</th>
         <th>Orders Count</th>
         <th>Items Count</th>
       </tr>
@@ -24,6 +25,7 @@
       <% @shopper_report.shop_collections.each do |shop| %>
           <tr>
             <td><%= image_tag logo_for_store(shop.name), style: 'height: auto; width: 100px;' %></td>
+            <td class="bold"><%= shop.start_time %></td>
             <td class="bold"><%= timer_string shop.time_taken %></td>
             <td><%= shop.orders_count %></td>
             <td><%= shop.items_count %></td>

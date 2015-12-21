@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217195109) do
+ActiveRecord::Schema.define(version: 20151221212009) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "variant_id",           limit: 8
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20151217195109) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shopper_report_id", limit: 4
+    t.string   "start_time",        limit: 255
   end
 
   create_table "shopper_reports", force: :cascade do |t|
     t.string   "shopper_name", limit: 255
     t.integer  "orders_count", limit: 4
     t.integer  "items_count",  limit: 4
-    t.integer  "test_amount",  limit: 4
     t.integer  "total_time",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
