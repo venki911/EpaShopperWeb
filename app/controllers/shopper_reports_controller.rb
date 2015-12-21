@@ -45,16 +45,15 @@ class ShopperReportsController < ApplicationController
       #begin
         report = ShopperReport.new.convert_from_json(params[:shopper_report])
         report.save
-        Thread.new do
-          ReportEmailer.send_report_uploaded_email(report).deliver_now
-        end
+        #Thread.new do
+        ReportEmailer.send_report_uploaded_email(report).deliver_now
+        #end
 
         render :json => {success: true} , status: :ok
-     # rescue => e
-        #p e.backtrace
-      #  render :json => e , status: :unprocessable_entity
-
-      #end
+      rescue => e
+        p e.backtrace
+        render :json => e , status: :unprocessable_entity
+      end
 
     else
       render :json => {success: false} , status: :unprocessable_entity

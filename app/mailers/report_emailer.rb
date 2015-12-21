@@ -1,6 +1,6 @@
 class ReportEmailer < ActionMailer::Base
 
-  default from: ENV['EPA_EMAIL_PASSWORD']
+  default from: 'epashopperapp@gmail.com' #ENV['EPA_EMAIL']
 
   def send_report_uploaded_email(shopper_report)
     @shopper_report = shopper_report
