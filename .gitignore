@@ -18,5 +18,5 @@
 
 config/database.yml
 config/secrets.yml
-
+config/initializers/environment_variables.rb
 
