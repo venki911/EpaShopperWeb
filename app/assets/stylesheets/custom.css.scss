@@ -41,19 +41,6 @@ $color-app-text-secondary: #777777;
   }
 }
 
-/* NAVBAR */
-/* ------------------------------------------------------ */
-
-
-.line-item-image{
-  height: 80px;
-  width: auto;
-}
-
-.store-logo{
-  height: 50px;
-  width: 150px;
-}
 
 /* GENERAL */
 /* ------------------------------------------------------ */
@@ -84,7 +71,22 @@ a.btn{
   margin: 20px 0;
 }
 
-/* SHOPPER REPORT DETAILS DISPLAY*/
+/* REPORT DETAILS HEADER */
+/* ------------------------------------------------------ */
+
+
+.line-item-image{
+  height: 80px;
+  width: auto;
+}
+
+.store-logo{
+  height: 50px;
+  width: 150px;
+}
+
+
+/* REPORT DETAILS BODY */
 /* ------------------------------------------------------ */
 
 .nav-tabs{

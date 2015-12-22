@@ -1,6 +1,50 @@
 <div class="container">
-  <div class="jumbotron">
-    <h1>Coming Soon...</h1>
-    <p>Under construction.</p>
-  </div>
+
+  <h1 class="section-header">Product Edit Requests</h1>
+
+  <section id="shopper-reports-index-table">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th></th>
+        <th>Uploaded On</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Aisle</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Aisle</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @product_edits.each do |product_edit| %>
+          <tr>
+            <td><img src="<%= product_edit.image_source %>" class="line-item-image"/></td>
+            <td><%= "#{format_report_datetime(product_edit.created_at)} by #{product_edit.shopper_name.capitalize}"  %></td>
+            <td><%= product_edit.title %></td>
+            <td><%= product_edit.description %></td>
+            <td>$<%= product_edit.price %></td>
+            <td><%= product_edit.aisle %></td>
+            <td><%= product_edit.title_new %></td>
+            <td><%= product_edit.description_new %></td>
+            <td><%= product_edit.price_new %></td>
+            <td><%= product_edit.aisle_new %></td>
+            <td>
+              <% if is_admin? %>
+                  <%= link_to 'Sync', product_edits_sync_path(product_edit), method: :post %>
+                  <%= link_to 'Delete', product_edits_path(report), method: :delete, data:{confirm: 'Really delete product edit request?'}, class: 'btn btn-sm btn-danger' %>
+              <% end %>
+            </td>
+
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+
 </div>
