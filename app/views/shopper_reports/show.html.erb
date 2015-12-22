@@ -6,98 +6,10 @@
     <p>Uploaded by <strong><%= @shopper_report.shopper_name.capitalize %></strong> on <%= format_report_date(@shopper_report.created_at) %></p>
   </section>
 
-  <!-- Summary of Shop Information -->
-  <!-- =========================================================================== -->
+  <%= render 'report_header' %>
 
-  <section id="report-shop-summary">
-    <table class="table" >
-      <thead>
-      <tr>
-        <th></th>
-        <th>Start Time</th>
-        <th>Time Taken</th>
-        <th>Orders Count</th>
-        <th>Items Count</th>
-      </tr>
-      </thead>
+  <%= render 'report_shop_details' %>
 
-      <tbody>
-      <% @shopper_report.shop_collections.each do |shop| %>
-          <tr>
-            <td><%= image_tag logo_for_store(shop.name), style: 'height: auto; width: 100px;' %></td>
-            <td class="bold"><%= shop.start_time %></td>
-            <td class="bold"><%= timer_string shop.time_taken %></td>
-            <td><%= shop.orders_count %></td>
-            <td><%= shop.items_count %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table> <!-- end shop information -->
-
-  </section>
-
-
-  <!-- Line Item Details For Each Shop -->
-  <!-- =========================================================================== -->
-  <section id="report-line-items">
-
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
-          <li role="presentation" class="<%= 'active' if index == 0 %>"><a href="#<%= shop.name %>" aria-controls="home" role="tab" data-toggle="tab"><%= shop.name %></a></li>
-      <% end %>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <br/><br/>
-      <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
-
-          <div role="tabpanel" class="<%= index == 0 ? 'tab-pane active' : 'tab-pane' %>" id="<%= shop.name %>">
-
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th></th>
-                <th class="text-center">Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Qty Req.</th>
-                <th>Qty Fnd.</th>
-                <th>Qty Sub.</th>
-                <th>Qty Miss</th>
-              </tr>
-              </thead>
-
-              <tbody>
-              <% shop.line_items.each do |item| %>
-                  <tr >
-                    <td style="vertical-align: middle;"> <img src="<%= item.image_source %>" class="line-item-image"/></td>
-                    <td style="vertical-align: middle;"><%= item.title %></td>
-                    <td><%= item.description %></td>
-                    <td>$<%= item.price %></td>
-                    <td class="big-cell"><%= item.quantity_requested %></td>
-                    <td class="big-cell color-fulfilled"><%= item.quantity_found %></td>
-                    <td class="big-cell color-substituted"><%= item.quantity_substituted %></td>
-                    <td class="big-cell color-missing"><%= item.quantity_missing %></td>
-                  </tr>
-              <% end %>
-              </tbody>
-
-            </table>
-
-
-
-
-          </div>
-      <% end %>
-
-    </div>
-
-    <%= link_to 'Back', :back, class: 'btn btn-warning top-bot-margin btn-min-width' %>
-
-  </section> <!-- end line item details -->
-
-
+  <%= link_to 'Back', :back, class: 'btn btn-warning top-bot-margin btn-min-width' %>
 
 </div>

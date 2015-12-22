@@ -1,6 +1,5 @@
 class LineItem < ActiveRecord::Base
 
-  include ActiveModel::Serializers::JSON
   belongs_to :shop_collection
 
   def convert_from_json(json)
@@ -15,16 +14,6 @@ class LineItem < ActiveRecord::Base
     self.quantity_missing = json[:quantity_missing] || 0
     self.aisle = json[:aisle]
     self
-  end
-
-  def attributes=(hash)
-    hash.each do |key, value|
-      send("#{key}=", value)
-    end
-  end
-
-  def attributes
-    instance_values
   end
 
   def quantity_found

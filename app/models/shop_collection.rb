@@ -1,6 +1,5 @@
 class ShopCollection < ActiveRecord::Base
 
-  include ActiveModel::Serializers::JSON
   belongs_to :shopper_report
   has_many :line_items, dependent: :destroy
 
@@ -17,16 +16,14 @@ class ShopCollection < ActiveRecord::Base
     self
   end
 
-  def attributes=(hash)
-    hash.each do |key, value|
-      send("#{key}=", value)
-    end
+  def quantity_missing
+    line_items.inject(0){|sum,e| sum += e.quantity_missing }
   end
-
-  def attributes
-    instance_values
+  def quantity_substituted
+    line_items.inject(0){|sum,e| sum += e.quantity_substituted }
   end
-
-
+  def quantity_found
+    line_items.inject(0){|sum,e| sum += e.quantity_found }
+  end
 
 end

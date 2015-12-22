@@ -1,0 +1,79 @@
+<!-- Line Item Details For Each Shop -->
+<!-- =========================================================================== -->
+<section id="report-line-items">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
+        <li role="presentation" class="<%= 'active' if index == 0 %>"><a href="#<%= shop.name %>" aria-controls="home" role="tab" data-toggle="tab"><%= shop.name %></a></li>
+    <% end %>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <br/><br/>
+    <% @shopper_report.shop_collections.each_with_index do |shop, index| %>
+
+        <div role="tabpanel" class="<%= index == 0 ? 'tab-pane active' : 'tab-pane' %>" id="<%= shop.name %>">
+
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">Title</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Requested</th>
+              <th>Found</th>
+              <th>Substituted</th>
+              <th>Missing</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% shop.line_items.each do |item| %>
+                <tr>
+                  <td> <img src="<%= item.image_source %>" class="line-item-image"/></td>
+                  <td><%= item.title %></td>
+                  <td><%= item.description %></td>
+                  <td>$<%= item.price %></td>
+                  <td class="big-cell"><%= item.quantity_requested %></td>
+                  <td class="big-cell color-fulfilled"><%= item.quantity_found %></td>
+                  <td class="big-cell color-substituted"><%= item.quantity_substituted %></td>
+                  <td class="big-cell color-missing"><%= item.quantity_missing %></td>
+                </tr>
+            <% end %>
+            <% if shop.line_items.count > 0 %>
+                <tr class="footer-row">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><strong>TOTALS:</strong></td>
+                  <td class="big-cell"><%= shop.items_count %></td>
+                  <td class="big-cell color-fulfilled"><%= shop.quantity_found %></td>
+                  <td class="big-cell color-substituted"><%= shop.quantity_substituted %></td>
+                  <td class="big-cell color-missing"><%= shop.quantity_missing %></td>
+                </tr>
+                <tr class="no-border-row">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><strong>PERC.</strong></td>
+                  <td></td>
+                  <td class="medium-cell color-fulfilled"><%= "#{quantity_percentage shop.quantity_found, num2: shop.items_count}"  %></td>
+                  <td class="medium-cell color-substituted"><%= "#{quantity_percentage shop.quantity_substituted, num2: shop.items_count}"  %></td>
+                  <td class="medium-cell color-missing"><%= "#{quantity_percentage shop.quantity_missing, num2: shop.items_count}" %></td>
+                </tr>
+            <% end %>
+            </tbody>
+
+          </table>
+
+        </div>
+    <% end %>
+
+  </div>
+
+
+
+</section> <!-- end line item details -->

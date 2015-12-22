@@ -1,6 +1,5 @@
 class ShopperReport < ActiveRecord::Base
 
-  include ActiveModel::Serializers::JSON
   has_many :shop_collections, dependent: :destroy
 
   def convert_from_json(json)
@@ -14,16 +13,6 @@ class ShopperReport < ActiveRecord::Base
     end
 
     self
-  end
-
-  def attributes=(hash)
-    hash.each do |key, value|
-      send("#{key}=", value)
-    end
-  end
-
-  def attributes
-    instance_values
   end
 
 end

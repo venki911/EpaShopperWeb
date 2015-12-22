@@ -27,6 +27,15 @@ module ApplicationHelper
     "#{date.in_time_zone('EST').strftime('%d %b.')}#{separator}#{date.in_time_zone('EST').strftime('%Y')}"
   end
 
+  def quantity_percentage(num1, num2:, value_if_div_by_zero: 0)
+    if num2 == 0
+      return "#{value_if_div_by_zero}%"
+    end
+
+    "#{(num1/num2*100).round(0)}%"
+  end
+
+
   private
     def append_leading_zero(num)
       num < 10 ? "0#{num}" : num

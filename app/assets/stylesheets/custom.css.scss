@@ -84,10 +84,8 @@ a.btn{
   margin: 20px 0;
 }
 
-
 /* SHOPPER REPORT DETAILS DISPLAY*/
 /* ------------------------------------------------------ */
-
 
 .nav-tabs{
   font-size: 1.5em;
@@ -95,11 +93,17 @@ a.btn{
 .bold{
   font-weight: bold;
 }
-
-
-
 .big-cell{
   font-size: 30px;
+}
+.medium-cell{
+  font-size: 22px;
+}
+.footer-row > td{
+  border-top: 1px solid black !important;
+}
+.no-border-row > td{
+  border-top: 0 !important;
 }
 .color-fulfilled{
   background-color: $color-app-fulfilled;
@@ -117,7 +121,10 @@ a.btn{
 
 #report-line-items{
   margin-top: 80px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+#report-line-items, #report-shop-summary{
 
   td, th{
     text-align: center;

@@ -1,0 +1,35 @@
+<!-- Summary of Shop Information -->
+<!-- =========================================================================== -->
+
+<section id="report-shop-summary">
+  <table class="table" >
+    <thead>
+    <tr>
+      <th></th>
+      <th>Start</th>
+      <th>Taken</th>
+      <th>Orders</th>
+      <th>Items</th>
+      <th>Found</th>
+      <th>Substituted</th>
+      <th>Missing</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @shopper_report.shop_collections.each do |shop| %>
+        <tr>
+          <td><%= image_tag logo_for_store(shop.name), style: 'height: auto; width: 100px;' %></td>
+          <td class="bold"><%= shop.start_time %></td>
+          <td class="bold"><%= timer_string shop.time_taken %></td>
+          <td><%= shop.orders_count %></td>
+          <td><%= shop.items_count %></td>
+          <td class="color-fulfilled"><%= "#{shop.quantity_found} (#{quantity_percentage shop.quantity_found, num2: shop.items_count, value_if_div_by_zero: 100})"  %></td>
+          <td class="color-substituted"><%= "#{shop.quantity_substituted} (#{quantity_percentage shop.quantity_substituted, num2: shop.items_count})"  %></td>
+          <td class="color-missing"><%= "#{shop.quantity_missing} (#{quantity_percentage shop.quantity_missing, num2: shop.items_count})" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table> <!-- end shop information -->
+
+</section>
