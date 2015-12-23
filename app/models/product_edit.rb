@@ -40,13 +40,17 @@ class ProductEdit < ActiveRecord::Base
     updated ? 'color-fulfilled' : 'color-substituted'
   end
 
+  def shopify_url
+    "#{BaseService::BASE_URL}/admin/products/#{product_id}"
+  end
+
   def get_update_json
     if updated?
       {
           product:{
               id: self.product_id,
               title: self.title,
-              body_html: self.description,
+              body_html: "<p>#{self.description}<\/p>",
               variants: [{
                   id: self.variant_id,
                   price: self.price,
@@ -60,7 +64,7 @@ class ProductEdit < ActiveRecord::Base
           product:{
               id: self.product_id,
               title: self.title_new,
-              body_html: self.description_new,
+              body_html: "<p>#{self.description_new}<\/p>",
               variants: [{
                              id: self.variant_id,
                              price: self.price_new,

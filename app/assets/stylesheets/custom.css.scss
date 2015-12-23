@@ -173,10 +173,21 @@ a.btn-default{
 
   td, th{
     text-align: center;
+    vertical-align: middle;
     font-size: 0.8em;
   }
 }
 .product-edit-state-header > th{
   color: white;
   text-align: center;
+}
+
+.original-edited-divider{
+  border-left: 1px solid #CCCCCC;
+}
+.product-updated-icon{
+  font-size: 1.5em;
+  margin-top: 10px;
+  color: $color-app-primary;
+  font-weight: bold;
 }
