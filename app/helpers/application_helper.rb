@@ -32,7 +32,7 @@ module ApplicationHelper
       return "#{value_if_div_by_zero}%"
     end
 
-    "#{(num1/num2*100).round(0)}%"
+    "#{(Float(num1)/num2*100).round(0)}%"
   end
 
   private

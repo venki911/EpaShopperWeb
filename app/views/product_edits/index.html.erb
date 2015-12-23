@@ -56,7 +56,7 @@
               <a href="<%= product_edit.shopify_url %>" class="btn btn-sm btn-default" target="_blank"><span class="glyphicon glyphicon-edit"></span></a>
 
               <% if is_admin? %>
-                <%= link_to product_edits_sync_path(product_edit), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete product edit request?'} do %>
+                <%= link_to product_edit_path(product_edit), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete product edit request?'} do %>
                     <span class="glyphicon glyphicon-remove"></span>
                 <% end %>
               <% end %>

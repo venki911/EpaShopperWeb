@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # =======================================================================================
   get 'product-edits', to: 'product_edits#index'
   post 'product-edits', to: 'product_edits#create'
-  delete 'product_edits/:id', to: 'products_edits#destroy', as: 'product_edit'
+  delete 'product-edits/:id', to: 'product_edits#destroy', as: 'product_edit'
   post 'product-edits/:id', to: 'product_edits#sync', as: 'product_edits_sync'
 
 end
