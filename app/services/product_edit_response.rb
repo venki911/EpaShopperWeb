@@ -1,0 +1,3 @@
+class ProductEditResponse < BaseResponse
+
+end
