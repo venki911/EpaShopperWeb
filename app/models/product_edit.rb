@@ -11,7 +11,7 @@ class ProductEdit < ActiveRecord::Base
     self.description = json[:description]
     self.description_new = json[:description_new]
     self.price = json[:price]
-    self.price = json[:price_new]
+    self.price_new = json[:price_new]
     self.aisle = json[:aisle]
     self.aisle_new = json[:aisle_new]
 

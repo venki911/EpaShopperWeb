@@ -8,6 +8,14 @@
       <thead>
       <tr>
         <th></th>
+        <th></th>
+        <th colspan="4" style="text-align: center; font-size: 1.4em;">Original Information</th>
+        <th colspan="4" style="text-align: center; font-size: 1.4em;">Edited Information</th>
+        <th></th>
+      </tr>
+
+      <tr>
+        <th></th>
         <th>Uploaded On</th>
         <th>Title</th>
         <th>Description</th>
@@ -25,19 +33,22 @@
       <% @product_edits.each do |product_edit| %>
           <tr>
             <td><img src="<%= product_edit.image_source %>" class="line-item-image"/></td>
-            <td><%= "#{format_report_datetime(product_edit.created_at)} by #{product_edit.shopper_name.capitalize}"  %></td>
+            <td><%= "#{format_report_datetime(product_edit.created_at)}" %><br/><%="by #{product_edit.shopper_name.capitalize}" %></td>
+
             <td><%= product_edit.title %></td>
             <td><%= product_edit.description %></td>
             <td>$<%= product_edit.price %></td>
             <td><%= product_edit.aisle %></td>
+
+
             <td><%= product_edit.title_new %></td>
             <td><%= product_edit.description_new %></td>
             <td><%= product_edit.price_new %></td>
             <td><%= product_edit.aisle_new %></td>
             <td>
               <% if is_admin? %>
-                  <%= link_to 'Sync', product_edits_sync_path(product_edit), method: :post %>
-                  <%= link_to 'Delete', product_edits_path(report), method: :delete, data:{confirm: 'Really delete product edit request?'}, class: 'btn btn-sm btn-danger' %>
+                  <%= link_to 'Sync', product_edits_sync_path(product_edit), method: :post, class: 'btn btn-sm btn-warning' %>
+                  <%= link_to 'Delete', product_edit_path(product_edit), method: :delete, data:{confirm: 'Really delete product edit request?'}, class: 'btn btn-sm btn-danger' %>
               <% end %>
             </td>
 

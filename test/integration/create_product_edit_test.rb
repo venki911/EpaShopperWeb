@@ -17,6 +17,8 @@ class CreateProductEditTest < ActionDispatch::IntegrationTest
     saved_product = ProductEdit.last
     assert saved_product.variant_id = @json[:variant_id]
     assert saved_product.title = @json[:title]
+    assert saved_product.shopper_name == @json[:shopper_name]
+    assert saved_product.price_new = @json[:price_new]
 
   end
 
