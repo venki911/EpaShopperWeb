@@ -1,3 +1,5 @@
+require 'json'
+
 class ProductEdit < ActiveRecord::Base
 
   def convert_from_json(json)
@@ -17,5 +19,58 @@ class ProductEdit < ActiveRecord::Base
 
     self
   end
+
+  def aisle_bg_class
+    aisle != aisle_new ? updated_bg_class : ''
+  end
+
+  def price_bg_class
+    price != price_new ? updated_bg_class : ''
+  end
+
+  def title_bg_class
+    title != title_new ? updated_bg_class : ''
+  end
+
+  def description_bg_class
+    description.gsub('\n', '').rstrip != description_new.gsub('\n', '').rstrip ? updated_bg_class : ''
+  end
+
+  def updated_bg_class
+    updated ? 'color-fulfilled' : 'color-substituted'
+  end
+
+  def get_update_json
+    if updated?
+      {
+          product:{
+              id: self.product_id,
+              title: self.title,
+              body_html: self.description,
+              variants: [{
+                  id: self.variant_id,
+                  price: self.price,
+                  sku: self.aisle
+                         }]
+          }
+
+      }.to_json
+    else
+      {
+          product:{
+              id: self.product_id,
+              title: self.title_new,
+              body_html: self.description_new,
+              variants: [{
+                             id: self.variant_id,
+                             price: self.price_new,
+                             sku: self.aisle_new
+                         }]
+          }
+
+      }.to_json
+    end
+  end
+
 
 end

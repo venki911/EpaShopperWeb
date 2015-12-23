@@ -34,7 +34,7 @@ $color-app-text-secondary: #777777;
     line-height: $navbar-app-height;
     font-size: 1.3em;
     transition: all .1s ease-in-out;
-    padding: 0px 15px;
+    padding: 0 15px;
   }
   li a:hover{
     transform: scale(1.1);
@@ -50,7 +50,7 @@ input[type=text]{
 }
 
 .btn{
-  border-radius: 0px;
+  border-radius: 0;
 }
 .btn-min-width{
   min-width: 150px;
@@ -62,6 +62,9 @@ a:link, a:visited {
 
 a.btn{
   color: white;
+}
+a.btn-default{
+  color: black;
 }
 
 .section-header{
@@ -116,6 +119,12 @@ a.btn{
 .color-missing{
   background-color: $color-app-missing;
 }
+.color-primary{
+  background-color: $color-app-primary;
+}
+.color-active{
+  background-color: $color-app-active;
+}
 
 #report-shop-summary{
   margin-top: 60px;
@@ -152,4 +161,22 @@ a.btn{
   p{
     color: $color-app-text-secondary
   }
+}
+
+
+
+/* PRODUCT EDIT */
+/* ------------------------------------------------------ */
+
+#product-edits-table{
+  margin: 60px 0 20px 0;
+
+  td, th{
+    text-align: center;
+    font-size: 0.8em;
+  }
+}
+.product-edit-state-header > th{
+  color: white;
+  text-align: center;
 }

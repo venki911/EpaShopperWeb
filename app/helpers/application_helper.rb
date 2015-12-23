@@ -35,7 +35,6 @@ module ApplicationHelper
     "#{(num1/num2*100).round(0)}%"
   end
 
-
   private
     def append_leading_zero(num)
       num < 10 ? "0#{num}" : num

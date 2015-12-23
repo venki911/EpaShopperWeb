@@ -2,31 +2,27 @@
 
   <h1 class="section-header">Product Edit Requests</h1>
 
-  <section id="shopper-reports-index-table">
+  <section id="product-edits-table">
     <table class="table table-striped">
 
       <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th colspan="4" style="text-align: center; font-size: 1.4em;">Original Information</th>
-        <th colspan="4" style="text-align: center; font-size: 1.4em;">Edited Information</th>
-        <th></th>
-      </tr>
-
-      <tr>
-        <th></th>
-        <th>Uploaded On</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Aisle</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Aisle</th>
-        <th></th>
-      </tr>
+        <tr class="product-edit-state-header">
+          <th colspan="6" class="color-primary">Original Information</th>
+          <th colspan="5" class="color-active">Edited Information</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Uploaded On</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Aisle</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Aisle</th>
+          <th></th>
+        </tr>
       </thead>
 
       <tbody>
@@ -35,20 +31,27 @@
             <td><img src="<%= product_edit.image_source %>" class="line-item-image"/></td>
             <td><%= "#{format_report_datetime(product_edit.created_at)}" %><br/><%="by #{product_edit.shopper_name.capitalize}" %></td>
 
-            <td><%= product_edit.title %></td>
-            <td><%= product_edit.description %></td>
-            <td>$<%= product_edit.price %></td>
-            <td><%= product_edit.aisle %></td>
+            <td class="<%= product_edit.title_bg_class %>"><%= product_edit.title %></td>
+            <td class="<%= product_edit.description_bg_class %>"><%= product_edit.description %></td>
+            <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price %></td>
+            <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle %></td>
 
-
-            <td><%= product_edit.title_new %></td>
-            <td><%= product_edit.description_new %></td>
-            <td><%= product_edit.price_new %></td>
-            <td><%= product_edit.aisle_new %></td>
+            <td class="<%= product_edit.title_bg_class %>"><%= product_edit.title_new %></td>
+            <td class="<%= product_edit.description_bg_class %>"><%= product_edit.description_new %></td>
+            <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price_new %></td>
+            <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle_new %></td>
             <td>
               <% if is_admin? %>
-                  <%= link_to 'Sync', product_edits_sync_path(product_edit), method: :post, class: 'btn btn-sm btn-warning' %>
-                  <%= link_to 'Delete', product_edit_path(product_edit), method: :delete, data:{confirm: 'Really delete product edit request?'}, class: 'btn btn-sm btn-danger' %>
+
+
+                  <%= link_to product_edits_sync_path(product_edit), method: :post, class: 'btn btn-sm btn-warning' do %>
+                      <span class="glyphicon glyphicon-ok"></span>
+                  <% end %>
+
+
+                  <%= link_to product_edits_sync_path(product_edit), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete product edit request?'} do %>
+                      <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
               <% end %>
             </td>
 
