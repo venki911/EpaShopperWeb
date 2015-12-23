@@ -44,8 +44,8 @@ Rails.application.configure do
       :address              => 'smtp.gmail.com',
       :port                 => 587,
       :domain               => 'gmail.com',
-      :user_name            => ENV['EPA_EMAIL'],
-      :password             => ENV['EPA_EMAIL_PASSWORD'],
+      :user_name            => ENV_EPA_EMAIL,
+      :password             => ENV_EPA_EMAIL_PASSWORD,
       :authentication       => 'plain',
       :enable_starttls_auto => true
   }

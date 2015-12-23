@@ -36,8 +36,12 @@
           <td><%= report.items_count %></td>
           <td>
             <% if is_admin? %>
-                <%= link_to 'Delete', report_path(report), method: :delete, data:{confirm: 'Really delete report?'}, class: 'btn btn-sm btn-danger' %>
+                <%= link_to report_path(report), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete report'} do %>
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                <% end %>
             <% end %>
+
+
           </td>
 
         </tr>
