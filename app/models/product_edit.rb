@@ -2,24 +2,20 @@ require 'json'
 
 class ProductEdit < ActiveRecord::Base
 
-  def convert_from_json(json)
-    self.variant_id = json[:variant_id]
-    self.product_id = json[:product_id]
-    self.image_source = json[:image_source]
-    self.shopper_name = json[:shopper_name]
+  MARKUP_FACTOR = 1.15
 
-    self.title = json[:title]
-    self.title_new = json[:title_new]
-    self.description = json[:description]
-    self.description_new = json[:description_new]
-    self.price = json[:price]
-    self.price_new = json[:price_new]
-    self.aisle = json[:aisle]
-    self.aisle_new = json[:aisle_new]
-
-    self
+  # COMPUTED PROPERTIES
+  #============================================================================================================
+  def price_new_markup
+    price_new * MARKUP_FACTOR
   end
 
+  def shopify_url
+    "#{BaseService::BASE_URL}/admin/products/#{product_id}"
+  end
+
+  # METHODS
+  #============================================================================================================
   def aisle_bg_class
     aisle != aisle_new ? updated_bg_class : ''
   end
@@ -40,9 +36,26 @@ class ProductEdit < ActiveRecord::Base
     updated ? 'color-fulfilled' : 'color-substituted'
   end
 
-  def shopify_url
-    "#{BaseService::BASE_URL}/admin/products/#{product_id}"
+  # JSON HELPER METHODS
+  #============================================================================================================
+  def convert_from_json(json)
+    self.variant_id = json[:variant_id]
+    self.product_id = json[:product_id]
+    self.image_source = json[:image_source]
+    self.shopper_name = json[:shopper_name]
+
+    self.title = json[:title]
+    self.title_new = json[:title_new]
+    self.description = json[:description]
+    self.description_new = json[:description_new]
+    self.price = json[:price]
+    self.price_new = json[:price_new]
+    self.aisle = json[:aisle]
+    self.aisle_new = json[:aisle_new]
+
+    self
   end
+
 
   def get_update_json
 
