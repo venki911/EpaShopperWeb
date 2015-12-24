@@ -83,7 +83,7 @@ class ProductEdit < ActiveRecord::Base
               body_html: "<p>#{self.description_new}<\/p>",
               variants: [{
                              id: self.variant_id,
-                             price: self.price_new,
+                             price: self.price_new_markup,
                              sku: self.aisle_new
                          }]
           }
