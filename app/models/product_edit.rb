@@ -45,8 +45,10 @@ class ProductEdit < ActiveRecord::Base
   end
 
   def get_update_json
+
     if updated?
       {
+          # If already updated, return json to revert to original product information
           product:{
               id: self.product_id,
               title: self.title,
@@ -61,6 +63,7 @@ class ProductEdit < ActiveRecord::Base
       }.to_json
     else
       {
+          # If not already updated, return json to convert to new values
           product:{
               id: self.product_id,
               title: self.title_new,
