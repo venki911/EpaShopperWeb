@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222161617) do
+ActiveRecord::Schema.define(version: 20151224194619) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "variant_id",           limit: 8
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20151222161617) do
     t.boolean  "updated",                     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_uid",       limit: 255
   end
 
   create_table "shop_collections", force: :cascade do |t|

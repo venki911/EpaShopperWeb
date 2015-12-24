@@ -2,7 +2,10 @@ require 'json'
 
 class ProductEdit < ActiveRecord::Base
 
+  COLOR_FULFILLED_CLASS = 'color-fulfilled'
+  COLOR_SUBSTITUTED_CLASS = 'color-substituted'
   MARKUP_FACTOR = 1.15
+  dragonfly_accessor :image
 
   # COMPUTED PROPERTIES
   #============================================================================================================
@@ -12,6 +15,11 @@ class ProductEdit < ActiveRecord::Base
 
   def shopify_url
     "#{BaseService::BASE_URL}/admin/products/#{product_id}"
+  end
+
+  def edited_image_url
+    # If no new image uploaded, just return original shopify image ulr (image_source)
+    image.nil? ? image_source : image.url
   end
 
   # METHODS
@@ -32,9 +40,14 @@ class ProductEdit < ActiveRecord::Base
     description.gsub('\n', ' ').rstrip != description_new.gsub('\n', ' ').rstrip ? updated_bg_class : ''
   end
 
-  def updated_bg_class
-    updated ? 'color-fulfilled' : 'color-substituted'
+  def image_bg_class
+    image.nil? ? COLOR_SUBSTITUTED_CLASS : ''
   end
+
+  def updated_bg_class
+    updated ? COLOR_FULFILLED_CLASS : COLOR_SUBSTITUTED_CLASS
+  end
+
 
   # JSON HELPER METHODS
   #============================================================================================================

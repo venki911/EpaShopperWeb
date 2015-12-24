@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 class="section-header">Product Edit Requests</h1>
+  <h1 class="section-header">Product Update Requests</h1>
 
   <section id="product-edits-table">
     <table class="table table-striped">
@@ -8,16 +8,17 @@
       <thead>
         <tr class="product-edit-state-header">
           <th colspan="6" class="color-primary">Original Information</th>
-          <th colspan="5" class="color-active original-edited-divider">Edited Information</th>
+          <th colspan="6" class="color-active original-edited-divider">Edited Information</th>
         </tr>
         <tr>
-          <th></th>
           <th>Uploaded On</th>
+          <th>Image</th>
           <th>Title</th>
           <th>Description</th>
           <th>Price</th>
           <th>Aisle</th>
-          <th class="original-edited-divider">Title</th>
+          <th class="original-edited-divider">Image</th>
+          <th>Title</th>
           <th>Description</th>
           <th>Price</th>
           <th>Aisle</th>
@@ -28,16 +29,23 @@
       <tbody>
       <% @product_edits.each do |product_edit| %>
           <tr>
-            <td><img src="<%= product_edit.image_source %>" class="line-item-image"/></td>
-
+            <!-- Original Product Information -->
+            <!-- ============================================================================================================================== -->
             <td><%= "#{format_report_datetime(product_edit.created_at)}" %><br/><strong><%="by #{product_edit.shopper_name.capitalize}" %></strong></td>
-
+            <td>
+              <img src="<%= product_edit.image_source %>" class="line-item-image"/>
+            </td>
             <td class="<%= product_edit.title_bg_class %>"><%= product_edit.title %></td>
             <td class="<%= product_edit.description_bg_class %>"><%= product_edit.description %></td>
             <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price %></td>
             <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle %></td>
 
-            <td class="<%= product_edit.title_bg_class %> original-edited-divider"><%= product_edit.title_new %></td>
+            <!-- Edited Product Information -->
+            <!-- ============================================================================================================================== -->
+            <td class="original-edited-divider <%= product_edit.image_bg_class %>">
+              <img src="<%= product_edit.edited_image_url %>" class="line-item-image"/>
+            </td>
+            <td class="<%= product_edit.title_bg_class %>"><%= product_edit.title_new %></td>
             <td class="<%= product_edit.description_bg_class %>"><%= product_edit.description_new %></td>
             <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price_new %><p class="color-primary"><%= "(#{product_edit.price_new_markup})" %></p></td>
             <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle_new %></td>
