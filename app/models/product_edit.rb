@@ -10,7 +10,7 @@ class ProductEdit < ActiveRecord::Base
   # COMPUTED PROPERTIES
   #============================================================================================================
   def price_new_markup
-    price_new * MARKUP_FACTOR
+    (price_new * MARKUP_FACTOR).round(2)
   end
 
   def shopify_url
@@ -41,7 +41,7 @@ class ProductEdit < ActiveRecord::Base
   end
 
   def image_bg_class
-    image.nil? ? COLOR_SUBSTITUTED_CLASS : ''
+    image.nil? ? '' : COLOR_SUBSTITUTED_CLASS
   end
 
   def updated_bg_class

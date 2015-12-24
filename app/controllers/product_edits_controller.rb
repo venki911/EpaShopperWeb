@@ -19,10 +19,10 @@ class ProductEditsController < ApplicationController
     if params[:product_edit]
 
       begin
-        report = ProductEdit.new.convert_from_json(params[:product_edit])
-        report.save
+        @product_edit = ProductEdit.new.convert_from_json(params[:product_edit])
+        @product_edit.save
 
-        render :json => {success: true} , status: :ok
+        render :json => {success: true, product_edit_id: @product_edit.id} , status: :ok
       rescue => e
         p e.backtrace
         render :json => e , status: :unprocessable_entity

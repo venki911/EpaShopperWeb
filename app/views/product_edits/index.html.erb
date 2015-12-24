@@ -43,11 +43,12 @@
             <!-- Edited Product Information -->
             <!-- ============================================================================================================================== -->
             <td class="original-edited-divider <%= product_edit.image_bg_class %>">
-              <img src="<%= product_edit.edited_image_url %>" class="line-item-image"/>
+              <%= link_to image_tag(product_edit.edited_image_url, alt: product_edit.title, class: 'line-item-image'),
+                          product_edit.edited_image_url, target: '_blank' %>
             </td>
             <td class="<%= product_edit.title_bg_class %>"><%= product_edit.title_new %></td>
             <td class="<%= product_edit.description_bg_class %>"><%= product_edit.description_new %></td>
-            <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price_new %><p class="color-primary"><%= "(#{product_edit.price_new_markup})" %></p></td>
+            <td class="<%= product_edit.price_bg_class %>">$<%= product_edit.price_new %><p class="markup-price-font"><%= "($#{product_edit.price_new_markup})" %></p></td>
             <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle_new %></td>
             <td>
               
