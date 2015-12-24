@@ -33,7 +33,7 @@ class ProductEdit < ActiveRecord::Base
   end
 
   def description_bg_class
-    description.gsub('\n', '').rstrip != description_new.gsub('\n', '').rstrip ? updated_bg_class : ''
+    description.gsub('\n', ' ').rstrip != description_new.gsub('\n', ' ').rstrip ? updated_bg_class : ''
   end
 
   def updated_bg_class
