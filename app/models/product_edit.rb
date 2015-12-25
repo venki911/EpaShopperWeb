@@ -10,7 +10,7 @@ class ProductEdit < ActiveRecord::Base
   # COMPUTED PROPERTIES
   #============================================================================================================
   def price_new_markup
-    (price_new * MARKUP_FACTOR).round(2)
+    price != price_new ? (price_new * MARKUP_FACTOR).round(2) : price
   end
 
   def shopify_url
@@ -20,6 +20,10 @@ class ProductEdit < ActiveRecord::Base
   def edited_image_url
     # If no new image uploaded, just return original shopify image ulr (image_source)
     image.nil? ? image_source : image.url
+  end
+
+  def fields_to_edit?
+    title != title_new || price != price_new || description.gsub('\n', ' ').rstrip != description_new.gsub('\n', ' ').rstrip || aisle != aisle_new
   end
 
   # METHODS

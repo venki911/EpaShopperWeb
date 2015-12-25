@@ -20,3 +20,4 @@ config/database.yml
 config/secrets.yml
 config/initializers/environment_variables.rb
 .idea/workspace.xml
+public/system/dragonfly/development/
