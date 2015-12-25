@@ -57,26 +57,28 @@
             <td class="<%= product_edit.aisle_bg_class %>"><%= product_edit.aisle_new %></td>
             <td>
 
-              <!-- Sync Button -->
-              <% if is_admin? && product_edit.fields_to_edit? %>
-                <%= link_to product_edits_sync_path(product_edit), method: :post, class: 'btn btn-sm btn-warning' do %>
-                  <% if product_edit.updated? %>
-                    <span class="glyphicon glyphicon-refresh"></span>
-                  <% else %>
-                    <span class="glyphicon glyphicon-ok"></span>
+              <div class="btn-group" role="group">
+                <!-- Sync Button -->
+                <% if is_admin? && product_edit.fields_to_edit? %>
+                  <%= link_to product_edits_sync_path(product_edit), method: :post, class: 'btn btn-sm btn-warning' do %>
+                    <% if product_edit.updated? %>
+                      <span class="glyphicon glyphicon-refresh"></span>
+                    <% else %>
+                      <span class="glyphicon glyphicon-ok"></span>
+                    <% end %>
                   <% end %>
                 <% end %>
-              <% end %>
 
-              <!-- Shopify Url Button -->
-              <a href="<%= product_edit.shopify_url %>" class="btn btn-sm btn-default" target="_blank"><span class="glyphicon glyphicon-edit"></span></a>
+                <!-- Shopify Url Button -->
+                <a href="<%= product_edit.shopify_url %>" class="btn btn-sm btn-default" target="_blank"><span class="glyphicon glyphicon-edit"></span></a>
 
-              <!-- Delete Button -->
-              <% if is_admin? %>
-                <%= link_to product_edit_path(product_edit), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete product edit request?'} do %>
-                    <span class="glyphicon glyphicon-remove"></span>
+                <!-- Delete Button -->
+                <% if is_admin? %>
+                  <%= link_to product_edit_path(product_edit), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete product edit request?'} do %>
+                      <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
 
               <% if product_edit.updated? %>
                   <p class="product-updated-icon"><span class="glyphicon glyphicon-ok-circle"></span> Updated</p>

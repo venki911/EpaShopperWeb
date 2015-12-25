@@ -21,7 +21,7 @@ module ApplicationHelper
 
 
   def format_report_datetime(date)
-    date.in_time_zone('EST').strftime('%d-%B-%Y %I:%M %p')
+    date.in_time_zone('EST').strftime('%d-%b-%Y %I:%M %p')
   end
   def format_report_date(date, separator: ' ')
     "#{date.in_time_zone('EST').strftime('%d %b.')}#{separator}#{date.in_time_zone('EST').strftime('%Y')}"
