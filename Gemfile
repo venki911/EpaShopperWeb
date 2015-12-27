@@ -40,6 +40,10 @@ gem 'mysql2', '~> 0.3.18'
 gem 'dragonfly'
 gem 'dragonfly-s3_data_store'
 
+# Pagination
+gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 #group :production do
 #  gem 'rack-cache', :require => 'rack/cache'
 #end

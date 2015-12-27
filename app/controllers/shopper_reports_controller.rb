@@ -3,6 +3,7 @@ class ShopperReportsController < ApplicationController
   before_action :set_report, only: [:show, :destroy]
   before_action :require_admin, only: [:destroy]
 
+  REPORTS_PER_PAGE = 10
 
   # GET INDEX
   #=================================================================================================================
@@ -11,12 +12,12 @@ class ShopperReportsController < ApplicationController
     if params[:date_filter]
       begin
         target_date = params[:date_filter].to_date.in_time_zone('EST')
-        @shopper_reports = ShopperReport.where(:created_at => target_date.beginning_of_day..target_date.end_of_day).order(created_at: :desc)
+        @shopper_reports = ShopperReport.where(:created_at => target_date.beginning_of_day..target_date.end_of_day).order(created_at: :desc).paginate(page: params[:page], per_page: REPORTS_PER_PAGE)
       rescue
-        @shopper_reports = ShopperReport.all.order(created_at: :desc)
+        @shopper_reports = ShopperReport.all.order(created_at: :desc).paginate(page: params[:page], per_page: REPORTS_PER_PAGE)
       end
     else
-      @shopper_reports = ShopperReport.all.order(created_at: :desc)
+      @shopper_reports = ShopperReport.all.order(created_at: :desc).paginate(page: params[:page], per_page: REPORTS_PER_PAGE)
     end
 
   end
@@ -77,7 +78,7 @@ class ShopperReportsController < ApplicationController
     end
 
     def require_admin
-      if !is_admin?
+      unless is_admin?
         flash[:danger] = 'That action requires admin access'
         redirect_to reports_path
       end

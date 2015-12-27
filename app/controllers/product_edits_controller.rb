@@ -5,10 +5,13 @@ class ProductEditsController < ApplicationController
 
   before_action :set_product_edit, only: [:destroy, :sync, :upload_image]
 
+  PRODUCT_EDITS_PER_PAGE = 5
+
   # INDEX [HTTP GET]
   #=================================================================================================================
   def index
-    @product_edits = ProductEdit.all
+    #@product_edits = ProductEdit.all
+    @product_edits = ProductEdit.paginate(page: params[:page], per_page: PRODUCT_EDITS_PER_PAGE)
   end
 
   # CREATE PRODUCT EDIT [HTTP POST]
