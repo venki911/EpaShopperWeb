@@ -6,7 +6,7 @@
 
       <div class="form-group">
         <div class="col-xs-4">
-          <%= text_field_tag :date_filter, params[:date_filter], class: 'form-control', placeholder: 'dd/mm/yyyy', autocomplete: 'off'%>
+          <%= text_field_tag :date_filter, params[:date_filter], class: 'form-control datepicker', placeholder: 'dd/mm/yyyy', autocomplete: 'off'%>
         </div>
         <%= submit_tag('Filter', name: nil, class: 'btn btn-warning btn-min-width')%>
       </div>
