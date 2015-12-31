@@ -6,7 +6,7 @@ class ProductEditsService < BaseService
     uri = URI("#{BASE_URL}/admin/products/#{product_edit.product_id}.json")
     req = Net::HTTP::Put.new(uri.path, initheader = {'Content-Type' =>'application/json'})
     req.basic_auth PUBLIC_API_KEY, PUBLIC_API_PW
-    req.body = product_edit.get_update_json
+    req.body = product_edit.to_update_json
 
     res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
       http.request(req)

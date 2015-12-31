@@ -74,40 +74,28 @@ class ProductEdit < ActiveRecord::Base
   end
 
 
-  def get_update_json
+  def to_update_json
 
-    if updated?
-      {
-          # If already updated, return json to revert to original product information
-          product:{
-              id: self.product_id,
-              title: self.title,
-              body_html: "<p>#{self.description}<\/p>",
-              variants: [{
-                  id: self.variant_id,
-                  price: self.price,
-                  sku: self.aisle
-                         }]
-          }
+    product_json = {product: {id: self.product_id}}
+    variant_json = {id: self.variant_id}
 
-      }.to_json
-    else
-      {
-          # If not already updated, return json to convert to new values
-          product:{
-              id: self.product_id,
-              title: self.title_new,
-              body_html: "<p>#{self.description_new}<\/p>",
-              variants: [{
-                             id: self.variant_id,
-                             price: self.price_new_markup,
-                             sku: self.aisle_new
-                         }]
-          }
 
-      }.to_json
+    if title != title_new
+      product_json[:product][:title] = updated? ? title : title_new
     end
-  end
+    if description.gsub('\n', ' ').rstrip != description_new.gsub('\n', ' ').rstrip
+      product_json[:product][:body_html] = "<p>#{updated? ? description : description_new}<\/p>"
+    end
+    if price != price_new
+      variant_json[:price] = updated? ? price : price_new_markup
+    end
+    if aisle != aisle_new
+      variant_json[:sku] = updated? ? aisle : aisle_new
+    end
 
+    product_json[:product][:variants] = [variant_json]
+    p product_json
+    product_json.to_json
+  end
 
 end

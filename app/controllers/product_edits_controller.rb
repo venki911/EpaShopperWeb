@@ -11,7 +11,7 @@ class ProductEditsController < ApplicationController
   #=================================================================================================================
   def index
     #@product_edits = ProductEdit.all
-    @product_edits = ProductEdit.paginate(page: params[:page], per_page: PRODUCT_EDITS_PER_PAGE)
+    @product_edits = ProductEdit.order(created_at: :desc).paginate(page: params[:page], per_page: PRODUCT_EDITS_PER_PAGE)
   end
 
   # CREATE PRODUCT EDIT [HTTP POST]
@@ -68,12 +68,13 @@ class ProductEditsController < ApplicationController
   def destroy
     @product_edit.destroy
     flash[:success] = 'Product update request successfully deleted'
-    redirect_to product_edits_path
+    redirect_to product_edits_path(page: params[:page])
   end
 
   # SYNC WITH SHOPIFY [HTTP POST]
   #=================================================================================================================
   def sync
+
     response = ProductEditsService.sync_product_edit(@product_edit)
 
     if response.success?
@@ -82,8 +83,7 @@ class ProductEditsController < ApplicationController
     else
       flash[:danger] = response.operation_error
     end
-
-    redirect_to product_edits_path
+    redirect_to product_edits_path(page: params[:page])
   end
 
   # PRIVATE HELPERS
