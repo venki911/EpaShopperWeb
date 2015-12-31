@@ -5,7 +5,7 @@ class ProductEditsController < ApplicationController
 
   before_action :set_product_edit, only: [:destroy, :sync, :upload_image]
 
-  PRODUCT_EDITS_PER_PAGE = 5
+  PRODUCT_EDITS_PER_PAGE = 10
 
   # INDEX [HTTP GET]
   #=================================================================================================================
