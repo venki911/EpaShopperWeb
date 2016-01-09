@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224194619) do
+ActiveRecord::Schema.define(version: 20160109220228) do
+
+  create_table "assignment_collections", force: :cascade do |t|
+    t.datetime "delivery_date"
+  end
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "variant_id",           limit: 8
@@ -27,6 +31,10 @@ ActiveRecord::Schema.define(version: 20151224194619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "shop_collection_id",   limit: 4
+  end
+
+  create_table "order_assignments", force: :cascade do |t|
+    t.string "name", limit: 255
   end
 
   create_table "product_edits", force: :cascade do |t|
@@ -59,6 +67,23 @@ ActiveRecord::Schema.define(version: 20151224194619) do
     t.string   "start_time",        limit: 255
   end
 
+  create_table "shopper_assignments", force: :cascade do |t|
+    t.integer  "shopper_id",               limit: 4
+    t.integer  "assignment_collection_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shopper_assignments_order_assignments", force: :cascade do |t|
+    t.integer "shopper_assignment_id", limit: 4
+    t.integer "order_assignment_id",   limit: 4
+  end
+
+  create_table "shopper_assignments_store_assignments", force: :cascade do |t|
+    t.integer "shopper_assignment_id", limit: 4
+    t.integer "store_assignment_id",   limit: 4
+  end
+
   create_table "shopper_reports", force: :cascade do |t|
     t.string   "shopper_name", limit: 255
     t.integer  "orders_count", limit: 4
@@ -74,6 +99,10 @@ ActiveRecord::Schema.define(version: 20151224194619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                       default: false
+  end
+
+  create_table "store_assignments", force: :cascade do |t|
+    t.string "name", limit: 255
   end
 
 end
