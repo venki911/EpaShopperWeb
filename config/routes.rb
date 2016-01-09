@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   # =======================================================================================
   resources :shoppers
 
+  # SHOPPER ASSIGNMENTS
+  # =======================================================================================
+  get 'shopper-assignments', to: 'assignment_collections#index'
+  get 'shopper-assignments/:id', to: 'assignment_collections#edit'
+  post 'shopper-assignments/:id', to: 'assignment_collections#update'
+  post 'shopper-assignments', to: 'assignment_collections#create'
+  delete 'shopper-assignments/:id', to: 'assignment_collections#destroy'
+
   # REPORTS
   # =======================================================================================
   get 'reports', to: 'shopper_reports#index'
@@ -28,5 +36,7 @@ Rails.application.routes.draw do
   put 'product-edits/image/:id', to: 'product_edits#upload_image'
   delete 'product-edits/:id', to: 'product_edits#destroy', as: 'product_edit'
   post 'product-edits/:id', to: 'product_edits#sync', as: 'product_edits_sync'
+
+
 
 end

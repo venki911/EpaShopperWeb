@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h1 class="section-header">Shopper Assignments</h1>
+
+  <%= link_to 'Create New', shopper_assignments_path, method: :post, class: 'btn btn-warning'  do %>
+      <span class="glyphicon glyphicon-remove"></span> Create New
+  <% end %>
+
+  <table class="table table-striped">
+
+    <thead>
+    <tr>
+      <th>Delivery Date</th>
+      <th>Assigned</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @assignment_collections.each do |assignment| %>
+        <tr>
+          <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignments_path(assignment) %></td>
+          <td>YES</td>
+          <td>
+            <% if is_admin? %>
+                <%= link_to shopper_assignments_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                <% end %>
+            <% end %>
+
+
+          </td>
+
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate %>
+
+</div>
