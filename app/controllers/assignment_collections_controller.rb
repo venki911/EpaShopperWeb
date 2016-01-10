@@ -1,11 +1,12 @@
 class AssignmentCollectionsController < ApplicationController
 
-  before_action set_assignment_collection, only: [:edit, :update, :destroy]
+  before_action :set_assignment_collection, only: [:edit, :update, :destroy]
 
   # INDEX [HTTP GET]
   #=================================================================================================================
   def index
-    @assignment_collections = AssignmentCollection.all
+    @new_assignment_collection = AssignmentCollection.new
+    @assignment_collections = AssignmentCollection.all.order(:delivery_date).reverse_order
   end
 
   # EDIT [HTTP GET]
@@ -21,26 +22,29 @@ class AssignmentCollectionsController < ApplicationController
   # UPDATE [HTTP POST]
   #=================================================================================================================
   def update
-    # save json from angular front end
+    # save json from angular frontend
   end
 
   # CREATE [HTTP POST]
   #=================================================================================================================
   def create
 
-    if params[:delivery_date]
-      target_date = params[:date_filter].to_date.in_time_zone('EST')
-      @assignment_collection = AssignmentCollection.new
-      @assignment_collection.delivery_date = target_date
+    target_date = new_assignment_params[:delivery_date].to_date
 
-      if @assignment_collection.save
-        redirect_to shopper_assignments_path(@assignment_collection)
-      else
-        render action: 'index'
-      end
+    if target_date.nil?
+      puts 'In true block'
+      flash[:warning] = 'Delivery date required for making new shopper assignments.'
+      redirect_to shopper_assignments_path
+      return
+    end
 
+    @new_assignment_collection = AssignmentCollection.new(delivery_date: target_date.in_time_zone('EST'))
+
+    if @new_assignment_collection.save
+      flash[:success] = "New shopper assignments list for #{@new_assignment_collection.delivery_date} created."
+      redirect_to shopper_assignment_path(@new_assignment_collection)
     else
-      render action: 'index'
+      render 'index'
     end
 
   end
@@ -49,7 +53,7 @@ class AssignmentCollectionsController < ApplicationController
   #=================================================================================================================
   def destroy
     if @assignment_collection.destroy
-      flash[:success] = 'Shopper assignments for day deleted..'
+      flash[:success] = 'Shopper assignments for day deleted.'
     else
       flash[:danger] = 'Failed to delete shopper assignments for day.'
     end
@@ -69,6 +73,10 @@ class AssignmentCollectionsController < ApplicationController
         redirect_to root_path
       end
 
+    end
+
+    def new_assignment_params
+      params.require(:assignment_collection).permit(:delivery_date)
     end
 
 end

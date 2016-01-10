@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   # SHOPPER ASSIGNMENTS
   # =======================================================================================
   get 'shopper-assignments', to: 'assignment_collections#index'
-  get 'shopper-assignments/:id', to: 'assignment_collections#edit'
-  post 'shopper-assignments/:id', to: 'assignment_collections#update'
   post 'shopper-assignments', to: 'assignment_collections#create'
+  get 'shopper-assignments/:id', to: 'assignment_collections#edit', as: 'shopper_assignment'
+  post 'shopper-assignments/:id', to: 'assignment_collections#update'
   delete 'shopper-assignments/:id', to: 'assignment_collections#destroy'
 
   # REPORTS

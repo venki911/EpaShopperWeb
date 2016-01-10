@@ -2,9 +2,25 @@
 
   <h1 class="section-header">Shopper Assignments</h1>
 
-  <%= link_to 'Create New', shopper_assignments_path, method: :post, class: 'btn btn-warning'  do %>
-      <span class="glyphicon glyphicon-remove"></span> Create New
+  <%= render 'assignment_collections/form' %>
+
+  <% if false %>
+  <%= form_tag shopper_assignments_path, method: :post do %>
+
+      <div class="form-group">
+        <div class="pull-left">
+          <%= text_field_tag :date_filter, params[:date_filter], class: 'form-control datepicker', placeholder: 'dd/mm/yyyy', autocomplete: 'off', readonly: true%>
+        </div>
+        <%= button_tag(type: 'submit', name: nil, class: 'btn btn-warning btn-min-width') do %>
+          <span class="glyphicon glyphicon-plus"></span> Create New
+        <% end %>
+      </div>
+
   <% end %>
+
+  <% end %>
+
+  <section id="shopper-assignments-index-content">
 
   <table class="table table-striped">
 
@@ -18,24 +34,24 @@
 
     <tbody>
     <% @assignment_collections.each do |assignment| %>
+
         <tr>
           <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignments_path(assignment) %></td>
           <td>YES</td>
           <td>
             <% if is_admin? %>
-                <%= link_to shopper_assignments_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
+                <%= link_to shopper_assignment_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
                     <span class="glyphicon glyphicon-remove"></span> Delete
                 <% end %>
             <% end %>
-
-
           </td>
-
         </tr>
+
     <% end %>
     </tbody>
   </table>
 
-  <%= will_paginate %>
+  </section>
+
 
 </div>
