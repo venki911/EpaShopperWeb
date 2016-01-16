@@ -14,9 +14,18 @@ class AssignmentCollection < ActiveRecord::Base
     }
   end
 
-  def convert_from_json(json)
+  def update_shopper_assignments(json)
+
+    self.shopper_assignments.each do |assignment|
+      assignment.delete
+    end
+
+    unless json.nil?
+      self.shopper_assignments = json.collect{|x| ShopperAssignment.new.convert_from_json(x)}
+    end
 
   end
+
 
   private
     def format_assignment_date(date, separator: ' ')

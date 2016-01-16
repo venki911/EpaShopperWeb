@@ -37,7 +37,13 @@
 
         <tr>
           <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignment_path(assignment) %></td>
-          <td>YES</td>
+          <td>
+            <% if assignment.shopper_assignments.empty? %>
+                <i class="glyphicon glyphicon-remove-circle"></i> No
+            <% else %>
+                <i class="glyphicon glyphicon-ok-circle"></i> Yes
+            <% end %>
+          </td>
           <td>
             <% if is_admin? %>
                 <%= link_to shopper_assignment_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>

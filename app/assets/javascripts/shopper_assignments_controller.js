@@ -12,6 +12,7 @@ myApp.controller("mainController", function($scope, $http, $location){
     $scope.availableOrders = [];
     $scope.isLoading = false;
     $scope.apiStatusMessage = null;                 // Message object displayed when loading or saving shopper assignment fails or succeeds.
+    $scope.firstTimeLoad = true;                    // True when displaying the initial loading view
 
     /*********************************************************************************************
      * Functions for saving and loading shopper assignments from rails api
@@ -22,8 +23,9 @@ myApp.controller("mainController", function($scope, $http, $location){
             url: $location.absUrl().split('?')[0] + "/api",
         }).then(function successCallback(response) {
 
-            console.log(response.data);
+            //console.log(response.data);
 
+            $scope.firstTimeLoad = false;
             $scope.deliveryDate = response.data.assignment_collection.delivery_date;
             $scope.createdAtDate = response.data.assignment_collection.created_at;
             $scope.updatedAtDate = response.data.assignment_collection.updated_at;

@@ -16,14 +16,14 @@ class AssignmentCollectionsController < ApplicationController
   end
 
   def edit_api
-    p @assignment_collection.convert_to_json
-    stores_placeholder = ['Costco', 'Loblaws']
+    available_stores = ['Costco', 'Loblaws']
+    ordersResponse = OrdersService.get_orders_for_date(@assignment_collection.delivery_date)
 
     render json: {
         assignment_collection: @assignment_collection.convert_to_json,
         available_shoppers: Shopper.all.collect{|x| x.username},
-        available_orders: ['Order #1414', 'Order #2323'],
-        available_stores: stores_placeholder
+        available_orders: ordersResponse.orders.collect{|x| x.name},  #['Order #1414', 'Order #2323'],
+        available_stores: available_stores
     }.to_json
 
   end
@@ -32,9 +32,10 @@ class AssignmentCollectionsController < ApplicationController
   #=================================================================================================================
   def update
 
-    if params[:shopper_assignments]
-      @assignment_collection.shopper_assignments = params[:shopper_assignments].collect{|x| ShopperAssignment.new.convert_from_json(x)}
+    if params.has_key?(:shopper_assignments)
+      @assignment_collection.update_shopper_assignments(params[:shopper_assignments])
     end
+
 
     if @assignment_collection.save
       render json: {status: 'success'}, status: :ok

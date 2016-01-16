@@ -75,7 +75,7 @@ class ProductEditsController < ApplicationController
   #=================================================================================================================
   def sync
 
-    response = ProductEditsService.sync_product_edit(@product_edit)
+    response = ProductsService.sync_product_edit(@product_edit)
 
     if response.success?
       @product_edit.updated = !@product_edit.updated
