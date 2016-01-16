@@ -1,0 +1,125 @@
+<div ng-app="myApp">
+
+  <div ng-controller="mainController">
+
+
+    <div ng-if="apiStatusMessage">
+      <div class="alert alert-{{apiStatusMessage.class}} alert-dismissible" role="alert">
+        <button type="button" class="close" aria-label="Close" ng-click="onStatusMessageDismiss()"><span aria-hidden="true">&times;</span></button>
+        <strong>{{apiStatusMessage.header}}</strong> {{apiStatusMessage.message}}
+      </div>
+    </div>
+
+    <section id="shopper-assignments-page-header" class="container">
+
+      <!-- Page title -->
+      <!-- *********************************************************************************** -->
+      <div id="report-header">
+        <div>{{deliveryDate}}</div>
+        <h1>Shopper Assignments</h1>
+        <p>Created on <strong>{{createdAtDate}}</strong>. Last updated on <strong>{{updatedAtDate}}</strong>.</p>
+      </div>
+
+      <!-- Assignment header buttons (+ shopper and save) -->
+      <!-- *********************************************************************************** -->
+      <div class="dropdown pull-left">
+        <button  class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-plus"></span> Add Shopper <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="shopper in availableShoppers"><a ng-click="onShopperSelected(shopper)">{{shopper}}</a></li>
+        </ul>
+      </div>
+
+      <div class="pull-right">
+        <button  class="btn btn-warning btn-lg" type="button" ng-click="onAssignmentsSave()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-saved" ng-show="!isLoading"></span><span class="glyphicon glyphicon-refresh glyphicon-spin" ng-show="isLoading"></span> Save
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </section>
+
+
+
+    <section id="shopper-assignments-body" ng-show="shopperAssignments.length > 0" class="container">
+
+      <div class="row" ng-repeat="assignment in shopperAssignments">
+
+        <!-- Shopper Assignment Details -->
+        <!-- *********************************************************************************** -->
+        <div class="col-sm-9 assignment-content">
+          <h2>{{assignment.shopper}} <small>Shopper Assignment</small></h2>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h4 class="assignment-content-subheader"><small>Store Assignment</small></h4>
+              <ul class="list-unstyled">
+                <li ng-repeat="store in assignment.store_assignments">
+                        <span class="label label-primary">
+                        {{store}}<a href="" ng-click="onStoreAssignmentRemove($index, assignment)"> <i class="glyphicon glyphicon-remove glyphicon-white"></i></a>
+                        </span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <h4 class="assignment-content-subheader"><small>Order Assignment</small></h4>
+              <ul class="list-unstyled">
+                <li ng-repeat="order in assignment.order_assignments">
+                        <span class="label label-success">
+                        {{order}}<a href="" ng-click="onOrderAssignmentRemove($index, assignment)"> <i class="glyphicon glyphicon-remove glyphicon-white"></i></a>
+                        </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div> <!-- /End Shopper Assignment Section -->
+
+
+        <!-- Actions Panel -->
+        <!-- *********************************************************************************** -->
+        <div class="col-sm-2 col-sm-offset-1 assignment-actions">
+          <div class="actions-header">Actions</div>
+
+          <div class="actions-content">
+
+            <!-- Shop Assignment Dropdown -->
+            <div class="dropdown">
+              <button  class="btn btn-warning dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-plus"></span> Add Shop <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="store in availableStores"><a ng-click="onStoreSelected(store, assignment)">{{store}}</a></li>
+              </ul>
+            </div>
+
+            <!-- Order Assignment Dropdown -->
+            <div class="dropdown">
+              <button  class="btn btn-warning dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-plus"></span> Add Order <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="order in availableOrders"><a ng-click="onOrderSelected(order, assignment)">{{order}}</a></li>
+              </ul>
+            </div>
+
+            <button ng-click="onAssignmentRemove($index)" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+
+          </div>
+
+        </div> <!-- /End Actions Panel -->
+
+      </div>
+
+    </section>
+
+    <section id="shopper-assignments-placeholder" ng-show="shopperAssignments.length == 0" class="container">
+
+      <div class="jumbotron">
+        <h1>No Shopper Assignments</h1>
+        <p>Get started by adding a shopper using the dropdown at the top fo the screen.</p>
+      </div>
+    </section>
+
+  </div>
+</div>

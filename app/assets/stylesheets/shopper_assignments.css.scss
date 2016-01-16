@@ -1,0 +1,88 @@
+/* Styles for shopper assignment section container */
+#shopper-assignments-body, #shopper-assignments-placeholder{
+  margin-top: 40px;
+
+  .row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+  }
+
+}
+
+#shopper-assignments-body > div{
+  margin-bottom: 30px;
+}
+
+/* Styles for shopper assignment details (left div container list of orders and stores assignment to shopper) */
+.assignment-content{
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.assignment-content > div{
+  margin-top: 20px;
+}
+
+.assignment-content-subheader{
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.glyphicon-white{
+  color: white;
+}
+
+/* Styles for actions panel (right div container buttons for various shopper assignment actions) */
+.assignment-actions{
+  background-color: #fefefe;
+  border: 1px solid #eeeeee;
+  text-align: center; padding: 0;
+}
+
+.actions-header{
+  border-bottom: 1px solid #eeeeee;
+  text-align: center;
+  padding: 10px 10px 5px 10px;
+  font-size: 1.2em;
+  color: #666666;
+}
+
+.actions-content{
+  padding: 15px 0;
+}
+
+.actions-content button{
+  margin: 5px 0;
+  width: 70%;
+}
+
+
+/* CSS to rotate loading indicator */
+.glyphicon-spin {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+

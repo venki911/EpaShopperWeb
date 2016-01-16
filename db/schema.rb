@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20160109220228) do
 
   create_table "assignment_collections", force: :cascade do |t|
     t.datetime "delivery_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -34,7 +36,8 @@ ActiveRecord::Schema.define(version: 20160109220228) do
   end
 
   create_table "order_assignments", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string  "name",                  limit: 255
+    t.integer "shopper_assignment_id", limit: 4
   end
 
   create_table "product_edits", force: :cascade do |t|
@@ -74,16 +77,6 @@ ActiveRecord::Schema.define(version: 20160109220228) do
     t.datetime "updated_at"
   end
 
-  create_table "shopper_assignments_order_assignments", force: :cascade do |t|
-    t.integer "shopper_assignment_id", limit: 4
-    t.integer "order_assignment_id",   limit: 4
-  end
-
-  create_table "shopper_assignments_store_assignments", force: :cascade do |t|
-    t.integer "shopper_assignment_id", limit: 4
-    t.integer "store_assignment_id",   limit: 4
-  end
-
   create_table "shopper_reports", force: :cascade do |t|
     t.string   "shopper_name", limit: 255
     t.integer  "orders_count", limit: 4
@@ -102,7 +95,8 @@ ActiveRecord::Schema.define(version: 20160109220228) do
   end
 
   create_table "store_assignments", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string  "name",                  limit: 255
+    t.integer "shopper_assignment_id", limit: 4
   end
 
 end

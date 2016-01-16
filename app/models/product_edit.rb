@@ -94,7 +94,7 @@ class ProductEdit < ActiveRecord::Base
     end
 
     product_json[:product][:variants] = [variant_json]
-    p product_json
+
     product_json.to_json
   end
 

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'shopper-assignments/:id', to: 'assignment_collections#edit', as: 'shopper_assignment'
   post 'shopper-assignments/:id', to: 'assignment_collections#update'
   delete 'shopper-assignments/:id', to: 'assignment_collections#destroy'
+  get 'shopper-assignments/:id/api', to: 'assignment_collections#edit_api'
 
   # REPORTS
   # =======================================================================================

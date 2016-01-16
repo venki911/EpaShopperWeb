@@ -36,7 +36,7 @@
     <% @assignment_collections.each do |assignment| %>
 
         <tr>
-          <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignments_path(assignment) %></td>
+          <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignment_path(assignment) %></td>
           <td>YES</td>
           <td>
             <% if is_admin? %>

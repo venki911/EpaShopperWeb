@@ -14,5 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
-//= require turbolinks
+//= require angular
+//= require angular-route
+//= require angular-resource
+//= require angular-rails-templates
+// require turbolinks
+//= require_tree ../templates
 //= require_tree .

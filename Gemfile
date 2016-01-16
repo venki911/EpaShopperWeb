@@ -46,6 +46,10 @@ gem 'dragonfly-s3_data_store'
 gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
+# Gems to manage angular
+gem 'bower-rails'
+gem 'angular-rails-templates', '~> 0.2.0'
+
 #group :production do
 #  gem 'rack-cache', :require => 'rack/cache'
 #end

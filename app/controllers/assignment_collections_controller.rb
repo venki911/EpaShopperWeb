@@ -1,6 +1,6 @@
 class AssignmentCollectionsController < ApplicationController
 
-  before_action :set_assignment_collection, only: [:edit, :update, :destroy]
+  before_action :set_assignment_collection, only: [:edit, :edit_api, :update, :destroy]
 
   # INDEX [HTTP GET]
   #=================================================================================================================
@@ -16,13 +16,31 @@ class AssignmentCollectionsController < ApplicationController
   end
 
   def edit_api
-    # send info back to angular frontend
+    p @assignment_collection.convert_to_json
+    stores_placeholder = ['Costco', 'Loblaws']
+
+    render json: {
+        assignment_collection: @assignment_collection.convert_to_json,
+        available_shoppers: Shopper.all.collect{|x| x.username},
+        available_orders: ['Order #1414', 'Order #2323'],
+        available_stores: stores_placeholder
+    }.to_json
+
   end
 
   # UPDATE [HTTP POST]
   #=================================================================================================================
   def update
-    # save json from angular frontend
+
+    if params[:shopper_assignments]
+      @assignment_collection.shopper_assignments = params[:shopper_assignments].collect{|x| ShopperAssignment.new.convert_from_json(x)}
+    end
+
+    if @assignment_collection.save
+      render json: {status: 'success'}, status: :ok
+    else
+      render json: {status: 'failure'}, status: :unprocessable_entity
+    end
   end
 
   # CREATE [HTTP POST]
@@ -32,7 +50,6 @@ class AssignmentCollectionsController < ApplicationController
     target_date = new_assignment_params[:delivery_date].to_date
 
     if target_date.nil?
-      puts 'In true block'
       flash[:warning] = 'Delivery date required for making new shopper assignments.'
       redirect_to shopper_assignments_path
       return
