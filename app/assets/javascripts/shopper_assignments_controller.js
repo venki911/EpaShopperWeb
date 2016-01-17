@@ -1,8 +1,5 @@
 (function() {
     angular.module('myApp', ['ngRoute', 'ngResource'])
-        .config(function($routeProvider){
-
-        })
         .controller("mainController", function($scope, $http, $location){
 
         $scope.shopperAssignments = [];
