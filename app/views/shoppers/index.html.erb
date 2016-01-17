@@ -23,9 +23,13 @@
           <td><%= shopper.created_at %></td>
           <td>
             <% if !shopper.admin? || (current_user.admin? && current_user.id == shopper.id) %>
+
             <%= link_to 'Edit', edit_shopper_path(shopper), method: :get, class: 'btn btn-sm btn-warning' %>
 
-              <%= link_to 'Delete', shopper_path(shopper), method: :delete, data:{confirm: "Really delete shopper #{shopper.username}"}, class: 'btn btn-sm btn-danger' %>
+            <%= link_to shopper_path(shopper), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: "Really delete shopper #{shopper.username}"} do %>
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            <% end %>
+
             <% end %>
           </td>
 

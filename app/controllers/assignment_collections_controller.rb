@@ -1,6 +1,7 @@
 class AssignmentCollectionsController < ApplicationController
 
   before_action :set_assignment_collection, only: [:edit, :edit_api, :update, :destroy]
+  before_action :require_admin, only:[:edit, :update, :create, :destroy]
 
   # INDEX [HTTP GET]
   #=================================================================================================================
@@ -113,6 +114,13 @@ class AssignmentCollectionsController < ApplicationController
 
     def new_assignment_params
       params.require(:assignment_collection).permit(:delivery_date)
+    end
+
+    def require_admin
+      unless is_admin?
+        flash[:danger] = 'That action requires admin access'
+        redirect_to assignments_path
+      end
     end
 
 end
