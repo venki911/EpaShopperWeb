@@ -89,6 +89,4 @@ Rails.application.configure do
       :enable_starttls_auto => true
   }
 
-  #config.assets.js_compressor = Uglifier.new(mangle: false)
-
 end

@@ -1,6 +1,6 @@
-(function() {
-    angular.module('myApp', ['ngRoute', 'ngResource'])
-        .controller("mainController", ['$scope', '$http', '$location', function($scope, $http, $location){
+ angular
+     .module('myApp', ['ngRoute', 'ngResource'])
+     .controller("mainController", ['$scope', '$http', '$location', function($scope, $http, $location){
 
         $scope.shopperAssignments = [];
         $scope.availableShoppers =  [];
@@ -110,4 +110,4 @@
         };
 
     }]);
-}.call(this));
+
