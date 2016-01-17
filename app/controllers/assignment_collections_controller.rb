@@ -1,7 +1,7 @@
 class AssignmentCollectionsController < ApplicationController
 
   before_action :set_assignment_collection, only: [:edit, :edit_api, :update, :destroy]
-  before_action :require_admin, only:[:edit, :update, :create, :destroy]
+  before_action :require_admin, only:[:edit, :create, :destroy]
 
   # INDEX [HTTP GET]
   #=================================================================================================================

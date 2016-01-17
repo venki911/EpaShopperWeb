@@ -30,7 +30,7 @@
                 $scope.availableStores = response.data.available_stores;
                 $scope.availableOrders = response.data.available_orders;
             }, function errorCallback(response) {
-                $scope.apiStatusMessage = {header: "Error", message: "Error loading page with status code: " + response.status}
+                $scope.apiStatusMessage = {header: "Error", class: 'warning', message: "Error loading page with status code: " + response.status}
             });
 
         }();
