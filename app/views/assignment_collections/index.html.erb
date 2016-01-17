@@ -46,7 +46,7 @@
           </td>
           <td>
             <% if is_admin? %>
-                <%= link_to assignments_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
+                <%= link_to assignment_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
                     <span class="glyphicon glyphicon-remove"></span> Delete
                 <% end %>
             <% end %>

@@ -27,6 +27,14 @@ class Order
 
     end
 
+    if self.order_date.nil? && !note.empty?
+      begin
+        self.order_date = DateTime.strptime(note, '%d-%b-%Y')
+      rescue
+        self.order_date = nil
+      end
+    end
+
     self
   end
 
