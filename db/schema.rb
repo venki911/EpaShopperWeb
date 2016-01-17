@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160109220228) do
 
   create_table "assignment_collections", force: :cascade do |t|
-    t.datetime "delivery_date"
+    t.date     "delivery_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

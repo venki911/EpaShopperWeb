@@ -27,6 +27,24 @@ class AssignmentCollection < ActiveRecord::Base
   end
 
 
+  def assignment_for_shopper(shopper_name)
+
+    shopper_assignment = self.shopper_assignments.joins(:shopper).where({shoppers: {username: shopper_name.downcase.strip}}).first
+
+    if shopper_assignment.nil?
+      {
+          orders: [],
+          stores: []
+      }.to_json
+    else
+      {
+          orders: shopper_assignment.order_assignments.collect{|x| x.name},
+          stores: shopper_assignment.store_assignments.collect{|x| x.name}
+      }.to_json
+    end
+
+  end
+
   private
     def format_assignment_date(date, separator: ' ')
       "#{date.in_time_zone('EST').strftime('%d %b.')}#{separator}#{date.in_time_zone('EST').strftime('%Y')}"

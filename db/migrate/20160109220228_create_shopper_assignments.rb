@@ -2,7 +2,7 @@ class CreateShopperAssignments < ActiveRecord::Migration
   def change
 
     create_table :assignment_collections do |t|
-      t.datetime :delivery_date
+      t.date :delivery_date
       t.timestamps
     end
     create_table :shopper_assignments do |t|

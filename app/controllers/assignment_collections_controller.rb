@@ -28,6 +28,24 @@ class AssignmentCollectionsController < ApplicationController
 
   end
 
+
+  # GET SHOPPER ASSIGNMENT FOR DATE [HTTP GET -> JSON]
+  #=================================================================================================================
+  def get_assignment
+
+    if !params[:shopper_name].nil?
+
+      delivery_date = Date.today
+      shopper_name = params[:shopper_name]
+      assignment_collection = AssignmentCollection.find_by(delivery_date: delivery_date) || AssignmentCollection.new
+
+      render json: assignment_collection.assignment_for_shopper(shopper_name)
+    else
+      render json: {status: 'failure'}, status: :not_found
+    end
+
+  end
+
   # UPDATE [HTTP POST]
   #=================================================================================================================
   def update
@@ -52,7 +70,7 @@ class AssignmentCollectionsController < ApplicationController
 
     if target_date.nil?
       flash[:warning] = 'Delivery date required for making new shopper assignments.'
-      redirect_to shopper_assignments_path
+      redirect_to assignments_path
       return
     end
 
@@ -60,7 +78,7 @@ class AssignmentCollectionsController < ApplicationController
 
     if @new_assignment_collection.save
       flash[:success] = "New shopper assignments list for #{@new_assignment_collection.delivery_date} created."
-      redirect_to shopper_assignment_path(@new_assignment_collection)
+      redirect_to assignment_path(@new_assignment_collection)
     else
       render 'index'
     end
@@ -76,7 +94,7 @@ class AssignmentCollectionsController < ApplicationController
       flash[:danger] = 'Failed to delete shopper assignments for day.'
     end
 
-    redirect_to shopper_assignments_path
+    redirect_to assignments_path
   end
 
 

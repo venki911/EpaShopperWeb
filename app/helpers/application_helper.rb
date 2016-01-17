@@ -26,6 +26,9 @@ module ApplicationHelper
   def format_report_date(date, separator: ' ')
     "#{date.in_time_zone('EST').strftime('%d %b.')}#{separator}#{date.in_time_zone('EST').strftime('%Y')}"
   end
+  def format_delivery_date(date)
+    "#{date.in_time_zone('EST').strftime('%d %B %Y')}"
+  end
 
   def quantity_percentage(num1, num2:, value_if_div_by_zero: 0)
     if num2 == 0

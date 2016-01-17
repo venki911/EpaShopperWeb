@@ -5,7 +5,7 @@
   <%= render 'assignment_collections/form' %>
 
   <% if false %>
-  <%= form_tag shopper_assignments_path, method: :post do %>
+  <%= form_tag assignments_path, method: :post do %>
 
       <div class="form-group">
         <div class="pull-left">
@@ -36,7 +36,7 @@
     <% @assignment_collections.each do |assignment| %>
 
         <tr>
-          <td><%= link_to format_report_datetime(assignment.delivery_date), shopper_assignment_path(assignment) %></td>
+          <td><%= link_to format_delivery_date(assignment.delivery_date), assignment_path(assignment) %></td>
           <td>
             <% if assignment.shopper_assignments.empty? %>
                 <i class="glyphicon glyphicon-remove-circle"></i> No
@@ -46,7 +46,7 @@
           </td>
           <td>
             <% if is_admin? %>
-                <%= link_to shopper_assignment_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
+                <%= link_to assignments_path(assignment), method: :delete, class: 'btn btn-sm btn-default', data:{confirm: 'Really delete shopper assignments for that day?'} do %>
                     <span class="glyphicon glyphicon-remove"></span> Delete
                 <% end %>
             <% end %>
