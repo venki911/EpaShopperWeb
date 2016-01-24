@@ -36,7 +36,9 @@ class AssignmentCollectionsController < ApplicationController
 
     if !params[:shopper_name].nil?
 
-      delivery_date = Date.today
+      delivery_date = params[:delivery_date].nil? ?  Date.today : DateTime.strptime(params[:delivery_date], '%d-%b-%Y')
+      delivery_date ||= Date.today
+
       shopper_name = params[:shopper_name]
       assignment_collection = AssignmentCollection.find_by(delivery_date: delivery_date) || AssignmentCollection.new
 
